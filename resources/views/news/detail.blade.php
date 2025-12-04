@@ -2,18 +2,19 @@
 
 @section('title', $dberita->judul)
 
-@section('content')
+@push('plugin-style')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+@endpush
 
+@section('content')
     <section class="max-w-7xl mx-auto">
         <div class="bg-white rounded-xl shadow-lg p-3 md:p-5 md:mt-7">
-        
+
             <div class="mb-5 relative">
                 <h1 class="text-black text-xl md:text-4xl font-bold">
                     {{ $dberita->judul }}
                 </h1>
-            </div>    
+            </div>
             <div class="space-y-4">
 
                 <!-- Desktop Carousel -->
@@ -72,7 +73,12 @@
             </div>
         </div>
     </section>
+@endsection
 
+@push('plugin-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+@endpush
+@push('custom-scripts')
     <script>
         new Swiper(".desktopSwiper", {
             loop: true,
@@ -98,4 +104,4 @@
             },
         });
     </script>
-@endsection
+@endpush

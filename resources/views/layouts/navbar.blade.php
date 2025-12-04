@@ -3,7 +3,7 @@
 
         <!-- Logo -->
         <a href="{{ route('home.index') }}" class="flex items-center">
-            <img src="{{ asset('logo-simata.png') }}" alt="Logo" class="h-10">
+            <img src="{{ asset('images/logo-satudata.png') }}" alt="Logo" class="h-10">
         </a>
 
         <!-- Desktop Menu -->
@@ -46,7 +46,11 @@
                 </button>
 
                 <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
-                    <a href="{{ route('news.index') }}" class="block px-4 py-2 hover:text-red-600">Berita Sumsel</a>
+                    <a href="{{ route('news.index') }}"
+                        class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Berita
+                        Sumsel</a>
+                    <a href="{{ route('infographics.index') }}"
+                        class="block px-4 py-2 {{ request()->is('publikasi/infografis*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Infografis</a>
                 </div>
             </li>
 

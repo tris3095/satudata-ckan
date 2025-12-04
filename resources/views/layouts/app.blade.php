@@ -16,6 +16,9 @@
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
+
+    @stack('plugin-style')
+    @stack('custom-style')
 </head>
 
 <body class="bg-gray-100 text-gray-900">
@@ -26,6 +29,9 @@
         @yield('content')
     </div>
     @include('layouts.footer')
+
+    @stack('plugin-scripts')
+    @stack('custom-scripts')
 </body>
 
 </html>

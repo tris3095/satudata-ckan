@@ -83,7 +83,8 @@
                     <span class="text-red-600">Berita</span> Terkini
                 </h2>
 
-                <a href="/news" class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
+                <a href="{{ route('news.index') }}"
+                    class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
                     Lihat Semua <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
@@ -115,10 +116,11 @@
         <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold">
-                    <span class="text-red-600">Info</span> Grafis
+                    <span class="text-red-600">Info</span>grafis
                 </h2>
 
-                <a href="/infografis" class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
+                <a href="{{ route('infographics.index') }}"
+                    class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
                     Lihat Semua <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
