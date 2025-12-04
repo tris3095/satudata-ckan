@@ -9,3 +9,8 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+.songket-pattern {
+   background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}

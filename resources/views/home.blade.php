@@ -23,7 +23,7 @@
                     </template>
                 @else
                     <div x-show="active === 0" x-transition.opacity class="absolute inset-0">
-                        <img src="{{ asset('images/kantor_gubernur.jpg') }}" class="w-full h-full object-cover" />
+                        <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full object-cover" />
                     </div>
                 @endif
 
@@ -54,7 +54,7 @@
         <section class="py-12">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">
-                    <span class="text-red-600">📄 Topik </span>Data
+                    <span class="text-red-600">Topik </span>Data
                 </h2>
             </div>
 

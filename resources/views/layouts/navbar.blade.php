@@ -30,10 +30,9 @@
                 </a>
             </li>
 
-            <!-- Dropdown Data Insight -->
-            <li class="relative group">
+            <li>
                 <a href="{{ route('insights.index') }}"
-                    class="{{ request()->is('insights*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
+                    class="{{ request()->is('data-insight*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
                     Data Insight
                 </a>
             </li>
