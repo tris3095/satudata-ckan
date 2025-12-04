@@ -76,6 +76,64 @@
 
             </div>
         </section>
+        {{-- ========================= --}}
+        {{--  GEOPORTAL SUMSEL SECTION --}}
+        {{-- ========================= --}}
+        <div class="container mx-auto px-4 py-10">
+
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold">
+                    <span class="text-red-600">📄 Data </span>Geospasial
+                </h2>
+            </div>
+
+            <!-- Grid Card -->
+            <div id="recordGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($records as $item)
+                    <div class="bg-white shadow rounded-lg overflow-hidden card-item justify-center mb-4"">
+
+                        <!-- Thumbnail -->
+                        @if ($item['thumbnail'])
+                            <img src="{{ $item['thumbnail'] }}" class="rounded-full object-cover"
+                                style="width: 120px; height: 120px;">
+                        @else
+                            <div
+                                class="w-full h-24 flex
+                                items-center justify-center bg-gray-700 text-white text-3xl">
+                                {{ $item['org_initial'] }}
+                            </div>
+                        @endif
+                        <div class="p-5">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">
+                                {{ $item['title'] ?? 'Tidak ada judul' }}
+                            </h2>
+
+                            <p class="text-sm text-gray-500 mb-3">
+                                <strong>Sumber:</strong> {{ $item['organization'] ?? 'Tidak diketahui' }}
+                            </p>
+
+                            <a href="https://geoportal.sumselprov.go.id/main/katalog" target="_blank"
+                                class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center items-center mt-8 space-x-2">
+                <button id="prevBtn" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                    Prev
+                </button>
+
+                <span id="pageInfo" class="text-lg font-semibold"></span>
+
+                <button id="nextBtn" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                    Next
+                </button>
+            </div>
+        </div>
 
         <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-10">
@@ -157,3 +215,41 @@
         </section>
     </div>
 @endsection
+@push('custom-scripts')
+    <script>
+        const items = document.querySelectorAll(".card-item");
+        const perPage = 6;
+        let currentPage = 1;
+
+        function showPage(page) {
+            const start = (page - 1) * perPage;
+            const end = start + perPage;
+
+            items.forEach((item, index) => {
+                item.style.display = (index >= start && index < end) ? "block" : "none";
+            });
+
+            document.getElementById("pageInfo").innerText =
+                `Page ${page} of ${Math.ceil(items.length / perPage)}`;
+
+            document.getElementById("prevBtn").disabled = page === 1;
+            document.getElementById("nextBtn").disabled = page === Math.ceil(items.length / perPage);
+        }
+
+        document.getElementById("prevBtn").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById("nextBtn").addEventListener("click", () => {
+            if (currentPage < Math.ceil(items.length / perPage)) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
+    </script>
+@endpush
