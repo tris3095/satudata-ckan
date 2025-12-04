@@ -51,7 +51,7 @@ class NewsController extends Controller
             );
             $dberita = json_decode(file_get_contents('https://sumselprov.go.id/api/sumselprov/beritadetailslug?judul=' . $request->slug, true, stream_context_create($arrContextOptions)));
             $gambar = preg_split('/[,]/', $dberita->gambar, -1, PREG_SPLIT_NO_EMPTY);
-            return view('client.news.detail', compact('dberita', 'gambar'));
+            return view('news.detail', compact('dberita', 'gambar'));
         } catch (\Throwable $th) {
             $dberita['data'] = "";
             $gambar = "";

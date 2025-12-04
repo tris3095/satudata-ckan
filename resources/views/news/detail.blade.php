@@ -3,95 +3,99 @@
 @section('title', $dberita->judul)
 
 @section('content')
-    <main class="mb-4">
-        <section class="hero">
-            <div class="container position-relative">
-                <h1 class="text-white">{{ $dberita->judul }}</h1>
-            </div>
-        </section>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        <section class="container">
-            <div class="card shadow-lg border-0 content-card p-4">
-                <div class="section-content">
-                    <div id="carouselExampleIndicators" class="carousel slide d-none d-md-block" data-bs-ride="carousel">
-                        <div class="carousel-indicators mb-3 gap-2">
-                            @foreach ($gambar as $key => $item)
-                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                    data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"
-                                    aria-current="{{ $key == 0 ? 'true' : '' }}" aria-label="Slide {{ $key + 1 }}">
-                                </button>
-                            @endforeach
-                        </div>
+    <section class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg p-3 md:p-5 md:mt-7">
+        
+            <div class="mb-5 relative">
+                <h1 class="text-black text-xl md:text-4xl font-bold">
+                    {{ $dberita->judul }}
+                </h1>
+            </div>    
+            <div class="space-y-4">
 
-                        <div class="carousel-inner">
+                <!-- Desktop Carousel -->
+                <div class="hidden md:block">
+                    <div class="swiper desktopSwiper relative w-full h-full rounded-lg overflow-hidden">
+
+                        <div class="swiper-wrapper">
                             @foreach ($gambar as $item)
-                                <div class="carousel-item single-slider {{ $loop->first ? 'active' : '' }}"
-                                    style="
-                                        background-image: url('https://sumselprov.go.id/storage/{{ substr($item, 7) }}');
-                                        height: 600px;
-                                        background-position: center center;
-                                        background-size: cover;
-                                        background-repeat: no-repeat;
-                                        position: relative;
-                                        z-index: 1;
-                                    ">
+                                <div class="swiper-slide">
+                                    <img class="w-full h-[600px] bg-center bg-cover"
+                                        style="background-image: url('https://sumselprov.go.id/storage/{{ substr($item, 7) }}')">
                                 </div>
                             @endforeach
                         </div>
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
+                        <!-- Pagination -->
+                        <div class="swiper-pagination !bottom-4"></div>
 
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
-                    </div>
-
-                    <div id="carouselExampleIndicators1" class="carousel slide d-block d-md-none" data-bs-ride="carousel">
-                        <div class="carousel-indicators gap-2">
-                            @foreach ($gambar as $key => $item)
-                                <button type="button" data-bs-target="#carouselExampleIndicators1"
-                                    data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"
-                                    aria-current="{{ $key == 0 ? 'true' : '' }}" aria-label="Slide {{ $key + 1 }}">
-                                </button>
-                            @endforeach
-                        </div>
-
-                        <div class="carousel-inner">
-                            @foreach ($gambar as $item)
-                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="height: 100%">
-                                    <img src="https://sumselprov.go.id/storage/{{ substr($item, 7) }}"
-                                        style="width: 100%; display:block; object-fit: cover;">
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
-                    </div>
-
-                    <div class="blog__content-11 p-relative transition-3" style="text-align: justify">
-                        <div class="d-flex col">
-                            <i class="flaticon-calendar me-2"></i>
-                            {{ \Carbon\Carbon::parse($dberita->tanggal)->isoFormat('dddd, D MMMM Y') }}
-                        </div>
-
-                        <p class="mt-3" style="font-size: 20px; text-align: justify">
-                            {!! $dberita->isi !!}
-                        </p>
+                        <!-- Navigation -->
+                        <div class="swiper-button-prev opacity-50" style="color: white"></div>
+                        <div class="swiper-button-next opacity-50" style="color: white"></div>
                     </div>
                 </div>
+
+                <!-- Mobile Carousel -->
+                <div class="block md:hidden">
+                    <div class="swiper mobileSwiper relative w-full h-full rounded-lg overflow-hidden">
+
+                        <div class="swiper-wrapper">
+                            @foreach ($gambar as $item)
+                                <div class="swiper-slide">
+                                    <img src="https://sumselprov.go.id/storage/{{ substr($item, 7) }}"
+                                        class="w-full h-full object-cover rounded-md">
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev opacity-25" style="color: white"></div>
+                        <div class="swiper-button-next opacity-25" style="color: white"></div>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="relative text-justify">
+                    <div class="flex items-center text-grey-600 font-bold">
+                        <i class="flaticon-calendar"></i>
+                        {{ \Carbon\Carbon::parse($dberita->tanggal)->isoFormat('dddd, D MMMM Y') }}
+                    </div>
+
+                    <div class="mt-6 text-base md:text-lg/7">
+                        {!! $dberita->isi !!}
+                    </div>
+                </div>
+
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <script>
+        new Swiper(".desktopSwiper", {
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        new Swiper(".mobileSwiper", {
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
 @endsection

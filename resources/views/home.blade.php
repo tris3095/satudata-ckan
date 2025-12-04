@@ -83,7 +83,7 @@
                     <span class="text-red-600">Berita</span> Terkini
                 </h2>
 
-                <a href="/berita" class="px-4 py-2 border rounded-full flex items-center gap-2 hover:bg-gray-100">
+                <a href="/news" class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
                     Lihat Semua <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
@@ -91,7 +91,7 @@
             <div class="relative">
                 <div id="news-slider" class="grid grid-cols-1 md:grid-cols-3 gap-6 snap-x snap-mandatory pb-4">
                     @foreach ($news as $item)
-                        <a href="#" target="_blank"
+                        <a href="{{ route('detail.news', $item['slug']) }}"
                             class="bg-white shadow rounded-xl snap-start hover:shadow-lg transition-all flex flex-col">
                             <div class="h-48 w-full overflow-hidden rounded-t-xl">
                                 <img src="{{ $item['filegambar'] }}" class="w-full h-full object-cover"
@@ -115,10 +115,10 @@
         <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold">
-                    <span class="text-blue-600">Info</span> Grafis
+                    <span class="text-red-600">Info</span> Grafis
                 </h2>
 
-                <a href="/infografis" class="text-blue-600 hover:underline">
+                <a href="/infografis" class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
                     Lihat Semua <i class="bi bi-arrow-right"></i>
                 </a>
             </div>

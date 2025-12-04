@@ -5,18 +5,18 @@
 @section('content')
     <main class="mb-6">
         <!-- Hero Section -->
-        <section class="hero bg-blue-700 py-12">
-            <div class="container mx-auto px-4 relative">
-                <h1 class="text-white text-4xl font-bold">Berita Terkini</h1>
-                <p class="mt-2 text-white text-lg">Provinsi Sumatera Selatan</p>
+        <section class="hero max-w-7xl mx-auto py-8">
+            <div class="px-6 relative">
+                <h1 class="text-4xl font-bold">Berita <span class="text-red-600">Terkini</span></h1>
+                <p class="mt-2 text-2xl">Provinsi Sumatera Selatan</p>
             </div>
         </section>
 
         <!-- Content Section -->
-        <section class="container mx-auto px-4 mt-8">
-            <div class="bg-white shadow-xl rounded-lg p-6">
-                <div class="section-content">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <section class="max-w-7xl mx-auto">
+            <!-- <div class="p-6"> -->
+                <div class="section-content px-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                         @foreach ($paginator as $item)
                             <div class="bg-white shadow rounded-lg overflow-hidden flex flex-col">
@@ -34,7 +34,7 @@
                                     </h5>
 
                                     <a href="{{ route('detail.news', ['slug' => $item->slug]) }}"
-                                        class="mt-auto inline-block border border-blue-600 text-blue-600 px-3 py-2 rounded text-sm hover:bg-blue-600 hover:text-white transition">
+                                        class="mt-auto inline-block border border-red-600 text-red-600 px-3 py-2 rounded text-sm hover:bg-red-600 hover:text-white transition">
                                         Baca Selengkapnya
                                     </a>
                                 </div>
@@ -47,7 +47,7 @@
                         {{ $paginator->links('pagination::tailwind') }}
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </section>
     </main>
 

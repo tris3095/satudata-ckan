@@ -45,8 +45,8 @@
                     Publikasi
                 </button>
 
-                <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 py-2 w-48">
-                    <a href="{{ route('news.index') }}" class="block px-4 py-2 hover:bg-gray-100">Berita Sumsel</a>
+                <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
+                    <a href="{{ route('news.index') }}" class="block px-4 py-2 hover:text-red-600">Berita Sumsel</a>
                 </div>
             </li>
 
@@ -56,9 +56,9 @@
                     Tentang
                 </button>
 
-                <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 py-2 w-48">
-                    <a href="/tentang/profil" class="block px-4 py-2 hover:bg-gray-100">Profil</a>
-                    <a href="/tentang/struktur" class="block px-4 py-2 hover:bg-gray-100">Struktur</a>
+                <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
+                    <a href="/tentang/profil" class="block px-4 py-2 hover:text-red-600">Profil</a>
+                    <a href="/tentang/struktur" class="block px-4 py-2 hover:text-red-600">Struktur</a>
                 </div>
             </li>
 
