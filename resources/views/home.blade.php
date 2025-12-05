@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <section class="slider__area relative z-[1]" x-data="{
+        <section class="slider__area relative z-10" x-data="{
             active: 0,
             total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
             init() {
@@ -48,6 +48,12 @@
                     </template>
                 </div>
             @endif
+            <div class="overflow-hidden bg-gray-100 border-t border-b">
+                <div class="whitespace-nowrap text-red-700 font-semibold py-2 animate-marquee-delay">
+                    Untuk meningkatkan keterpaduan dan transparansi, website SIMATA Sumsel resmi bertransformasi menjadi
+                    Satu Data Sumsel sesuai kebijakan nasional Satu Data Indonesia.
+                </div>
+            </div>
 
         </section>
 

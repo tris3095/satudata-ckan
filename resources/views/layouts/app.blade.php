@@ -31,8 +31,32 @@
     </div>
     @include('layouts.footer')
 
+    <button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-sm shadow-lg hover:bg-red-700 transition cursor-pointer">
+        <i class="bi bi-arrow-up" aria-hidden="true"></i>
+    </button>
+
     @stack('plugin-scripts')
     @stack('custom-scripts')
+
+    <script>
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) {
+                scrollTopBtn.classList.remove("hidden");
+            } else {
+                scrollTopBtn.classList.add("hidden");
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 </body>
 
 </html>
