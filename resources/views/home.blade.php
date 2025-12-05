@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        <section class="slider__area relative z-[1]" x-data="{
+        <section class="slider__area relative z-10" x-data="{
             active: 0,
             total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
             init() {
@@ -23,7 +23,7 @@
                     </template>
                 @else
                     <div x-show="active === 0" x-transition.opacity class="absolute inset-0">
-                        <img src="{{ asset('images/kantor_gubernur.jpg') }}" class="w-full h-full object-cover" />
+                        <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full object-cover" />
                     </div>
                 @endif
 
@@ -48,13 +48,19 @@
                     </template>
                 </div>
             @endif
+            <div class="overflow-hidden bg-gray-100 border-t border-b">
+                <div class="whitespace-nowrap text-red-700 font-semibold py-2 animate-marquee-delay">
+                    Untuk meningkatkan keterpaduan dan transparansi, website SIMATA Sumsel resmi bertransformasi menjadi
+                    Satu Data Sumsel sesuai kebijakan nasional Satu Data Indonesia.
+                </div>
+            </div>
 
         </section>
 
         <section class="py-12">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold">
-                    <span class="text-red-600">📄 Topik </span>Data
+                    <span class="text-red-600">Topik </span>Data
                 </h2>
             </div>
 

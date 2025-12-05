@@ -30,10 +30,9 @@
                 </a>
             </li>
 
-            <!-- Dropdown Data Insight -->
-            <li class="relative group">
+            <li>
                 <a href="{{ route('insights.index') }}"
-                    class="{{ request()->is('insights*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
+                    class="{{ request()->is('data-insight*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
                     Data Insight
                 </a>
             </li>
@@ -59,15 +58,14 @@
                 <button class="{{ request()->is('tentang*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
                     Tentang
                 </button>
-
                 <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
-                    <a href="/tentang/profil" class="block px-4 py-2 hover:text-red-600">Profil</a>
-                    <a href="/tentang/struktur" class="block px-4 py-2 hover:text-red-600">Struktur</a>
+                    <a href="{{ route('tentang.profil') }}" class="block px-4 py-2 hover:text-red-600">Profil</a>
+                    <a href="{{ route('tentang.struktur') }}" class="block px-4 py-2 hover:text-red-600">Struktur</a>
                 </div>
             </li>
 
             <li>
-                <a href="#"
+                <a href="https://data.go.id/regulation" target="_blank"
                     class="{{ request()->is('regulasi*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
                     Regulasi SDI
                 </a>

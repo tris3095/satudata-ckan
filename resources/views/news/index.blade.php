@@ -6,16 +6,16 @@
     <main class="mb-6">
         <!-- Hero Section -->
         <section class="hero max-w-7xl mx-auto py-8">
-            <div class="px-6 relative">
-                <h1 class="text-4xl font-bold text-red-600">Berita <span class="text-black">Terkini</span></h1>
-                <p class="mt-2 text-2xl">Provinsi Sumatera Selatan</p>
+            <div class="px-3 md:px-5 relative">
+                <h1 class="text-2xl md:text-4xl font-bold text-red-600">Berita <span class="text-black">Terkini</span></h1>
+                <p class="text-lg md:text-2xl">Provinsi Sumatera Selatan</p>
             </div>
         </section>
 
         <!-- Content Section -->
         <section class="max-w-7xl mx-auto">
             <!-- <div class="p-6"> -->
-            <div class="section-content px-6">
+            <div class="section-content px-3 md:px-5">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                     @foreach ($paginator as $item)

@@ -1,6 +1,6 @@
-<footer class="relative bg-gray-900 text-gray-300 mt-20 overflow-hidden">
+<footer class="relative bg-red-900 text-gray-300 mt-20 overflow-hidden">
     <div class="absolute inset-0 opacity-25 pointer-events-none">
-        <div class="absolute w-80 h-80 bg-blue-600 rounded-full blur-3xl animate-pulse -top-10 -left-20"></div>
+        <div class="absolute w-80 h-80 bg-yellow-600 rounded-full blur-3xl animate-pulse -top-10 -left-20"></div>
         <div class="absolute w-96 h-96 bg-yellow-500 rounded-full blur-3xl animate-ping bottom-0 right-0"></div>
     </div>
 
@@ -28,14 +28,13 @@
 
             <div>
                 <h3 class="text-xl font-semibold text-white mb-3">Statistik Pengunjung</h3>
-
-                <div class="bg-gray-800 p-4 rounded-xl shadow-inner border border-gray-700">
+                <div>
                     <p class="text-gray-400 text-sm">Total Pengunjung</p>
-                    <p class="text-3xl font-bold text-blue-400">
+                    <p class="text-3xl font-bold text-white">
                         {{ number_format($visitorTotal ?? 0) }}
                     </p>
 
-                    <div class="mt-4 border-t border-gray-700 pt-4 space-y-2">
+                    <div class="mt-4 pt-4 space-y-2">
                         <p class="text-gray-400 text-sm">Hari ini:
                             <span class="text-white font-semibold">{{ number_format($visitorToday ?? 0) }}</span>
                         </p>
@@ -50,7 +49,7 @@
             </div>
         </div>
 
-        <div class="mt-12 pt-6 border-t border-gray-700 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="mt-12 pt-6 border-t border-gray-400 flex flex-col md:flex-row items-center justify-between gap-4">
             <p class="text-gray-400 text-sm">
                 <i class="bi bi-c-circle"></i> {{ date('Y') }} Satu Data Provinsi Sumatera Selatan. Semua hak
                 dilindungi.
