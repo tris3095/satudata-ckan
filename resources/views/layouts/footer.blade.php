@@ -31,19 +31,22 @@
                 <div>
                     <p class="text-gray-400 text-sm">Total Pengunjung</p>
                     <p class="text-3xl font-bold text-white">
-                        {{ number_format($visitorTotal ?? 0) }}
+                        {{ number_format($totalVisitors) }}
                     </p>
 
-                    <div class="mt-4 pt-4 space-y-2">
+                    <div class="mt-2 space-y-2">
                         <p class="text-gray-400 text-sm">Hari ini:
-                            <span class="text-white font-semibold">{{ number_format($visitorToday ?? 0) }}</span>
+                            <span class="text-white font-semibold">{{ number_format($todayVisitors) }}</span>
                         </p>
                         <p class="text-gray-400 text-sm">Bulan ini:
-                            <span class="text-white font-semibold">{{ number_format($visitorMonth ?? 0) }}</span>
+                            <span class="text-white font-semibold">{{ number_format($monthlyVisitors) }}</span>
                         </p>
-                        <p class="text-gray-400 text-sm">Pengunjung Online:
+                        <p class="text-gray-400 text-sm">Tahun ini:
+                            <span class="text-white font-semibold">{{ number_format($yearlyVisitors) }}</span>
+                        </p>
+                        {{-- <p class="text-gray-400 text-sm">Pengunjung Online:
                             <span class="text-green-400 font-semibold">{{ $visitorOnline ?? 1 }}</span>
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
             </div>

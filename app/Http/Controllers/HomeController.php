@@ -4,21 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Infographic;
+use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Services\CkanService;
 use App\Services\SumselNewsService;
+use Illuminate\Support\Facades\View;
+use Carbon\Carbon;
 use App\Services\GeoportalService;
 
 class HomeController extends Controller
 {
-    public function index(SumselNewsService $newsService, CkanService $ckan, GeoportalService $geoportal)
+    protected SumselNewsService $newsService;
+    protected CkanService $ckan;
+    protected GeoportalService $geoportal;
+
+    public function __construct(SumselNewsService $newsService, CkanService $ckan, GeoportalService $geoportal)
+    {
+        $this->newsService = $newsService;
+        $this->ckan = $ckan;
+        $this->geoportal = $geoportal;
+    }
+
+    public function index()
     {
         $banner = Banner::active()
             ->orderBy('id', 'DESC')
             ->get();
-        $news = $newsService->getNews();
-        $groups = $ckan->listGroups(true);
-        $records = $geoportal->getAll();
+        $news = $this->$newsService->getNews();
+        $groups = $this->$ckan->listGroups(true);
+        $records = $this->$geoportal->getAll();
         $infographics = Infographic::orderBy('published_at', 'DESC')
             ->take(8)
             ->get();
