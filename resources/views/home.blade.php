@@ -73,8 +73,9 @@
                     </a>
                 @endforeach
             </div>
-        </section> {{-- ========================= --}} {{-- GEOPORTAL SUMSEL SECTION --}} {{-- ========================= --}} <div
-            class="container mx-auto px-4 py-10">
+        </section>
+        {{-- ========================= --}} {{-- GEOPORTAL SUMSEL SECTION --}} {{-- ========================= --}}
+        <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-10">
                 <h2 class="text-3xl font-bold"> <span class="text-red-600">Geo</span>spasial </h2><a
                     href="https://geoportal.sumselprov.go.id/"
@@ -93,7 +94,8 @@
                                 {{ $item['org_initial'] }} </div>
                         @endif
                         <div class="p-5">
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2"> {{ $item['title'] ?? 'Tidak ada judul' }}
+                            <h2 class="text-xl font-semibold text-gray-800 mb-2">
+                                {{ $item['title'] ?? 'Tidak ada judul' }}
                             </h2>
                             <p class="text-sm text-gray-500 mb-3"> <strong>Sumber:</strong>
                                 {{ $item['organization'] ?? 'Tidak diketahui' }} </p> <a
@@ -103,9 +105,8 @@
                         </div>
                     </div>
                 @endforeach
-            </div> <!-- Pagination -->
-
-        </div>
+            </div>
+        </section>
         <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-10">
                 <h2 class="text-3xl font-bold"> <span class="text-red-600">Berita</span> Terkini </h2> <a
