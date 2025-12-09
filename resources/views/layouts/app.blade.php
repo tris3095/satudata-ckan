@@ -22,10 +22,10 @@
     @stack('custom-style')
 </head>
 
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-gray-50 text-gray-900">
 
     @include('layouts.navbar')
-
+    @yield('banner')
     <div class="container mx-auto">
         @yield('content')
     </div>

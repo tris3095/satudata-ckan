@@ -30,9 +30,9 @@ class HomeController extends Controller
         $banner = Banner::active()
             ->orderBy('id', 'DESC')
             ->get();
-        $news = $this->$newsService->getNews();
-        $groups = $this->$ckan->listGroups(true);
-        $records = $this->$geoportal->getAll();
+        $news = $this->newsService->getNews();
+        $groups = $this->ckan->listGroups(true);
+        $records = $this->geoportal->getAll();
         $infographics = Infographic::orderBy('published_at', 'DESC')
             ->take(8)
             ->get();
