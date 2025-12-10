@@ -25,10 +25,7 @@
 <body class="bg-gray-50 text-gray-900">
 
     @include('layouts.navbar')
-    @yield('banner')
-    <div class="container mx-auto">
-        @yield('content')
-    </div>
+    @yield('content')
     @include('layouts.footer')
 
     <button id="scrollTopBtn"

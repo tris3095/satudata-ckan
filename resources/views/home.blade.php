@@ -12,55 +12,61 @@
         }
     </style>
 @endpush
-@section('banner')
-    <section class="relative w-full h-[550px] overflow-hidden" x-data="{
-        active: 0,
-        total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
-        init() {
-            setInterval(() => {
-                this.active = (this.active + 1) % this.total
-            }, 5000)
-        }
-    }">
-        <div class="absolute inset-0 w-full h-full">
+
+@section('content')
+    <section class="mx-0"
+        x-data="{
+                active: 0,
+                total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
+                init() {
+                        setInterval(() => { this.active = (this.active + 1) % this.total }, 5000)
+                        }
+                }">
+        <div class="inset-0 relative w-full h-full">
             @if ($banner->isNotEmpty())
                 <template x-for="(item, index) in {{ $banner->toJson() }}">
-                    <div x-show="active === index" x-transition.opacity
-                        class="absolute inset-0 w-full h-full> <img :src="item.image_url"
-                        class="w-full h-full object-cover" />
+                    <div x-show="active === index" x-transition.opacity class="absolute inset-0 w-full h-full">
+                        <img src="item.image_url" class="w-full h-full object-cover"/>
+                    </div>
+                </template>
+            @else
+                <div x-show="active === 0" x-transition.opacity class=" inset-0">
+                    <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0"/>
+                </div>
+            @endif
+            
+            @if ($banner->isNotEmpty())
+                <button @click="active = active === 0 ? total - 1 : active - 1" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button @click="active = (active + 1) % total" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            @endif
         </div>
-        </template>
-    @else
-        <div x-show="active === 0" x-transition.opacity class="absolute inset-0"> <img
-                src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full object-cover p-0" /> </div>
-        @endif @if ($banner->isNotEmpty())
-            <button @click="active = active === 0 ? total - 1 : active - 1"
-                class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
-                <i class="bi bi-chevron-left"></i> </button> <button @click="active = (active + 1) % total"
-                class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
-                <i class="bi bi-chevron-right"></i> </button>
-        @endif
-        </div>
+
         @if ($banner->isNotEmpty())
-            <div class="flex gap-3 justify-center mt-4"> <template x-for="index in total"> <button
-                        @click="active = index - 1" :class="active === index - 1 ? 'bg-blue-600' : 'bg-white/50'"
-                        class="w-3 h-3 rounded-full border border-white"></button> </template> </div>
+            <div class="flex gap-3 justify-center mt-4">
+                <template x-for="index in total">
+                    <button @click="active = index - 1" :class="active === index - 1 ? 'bg-blue-600' : 'bg-white/50'" class="w-3 h-3 rounded-full border border-white">
+                    </button>
+                </template>
+            </div>
         @endif
     </section>
     <div class="overflow-hidden bg-gray-100 border-t border-b">
         <div class="whitespace-nowrap text-red-700 font-semibold py-2 animate-marquee-delay"> Untuk meningkatkan
             keterpaduan dan transparansi, website SIMATA Sumsel resmi bertransformasi menjadi Satu Data Sumsel
-            sesuai kebijakan nasional Satu Data Indonesia. </div>
+            sesuai kebijakan nasional Satu Data Indonesia.
+        </div>
     </div>
 
-@endsection
-@section('content')
-    <div>
-        <section class="py-12">
+    <div class="mx-auto">
+        <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold"> <span class="text-red-600">Topik </span>Data </h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($groups as $group)
                     {{-- <a href="{{ route('group.show', $group['name']) }}"> --}} <a href="#">
                         <div
@@ -88,7 +94,7 @@
                         <!-- Thumbnail -->
                         @if ($item['thumbnail'])
                             <img src="{{ $item['thumbnail'] }}" class="rounded-full object-cover"
-                                style="width: 120px; height: 120px;">
+                                style="width: 120px; height: 120px;"/>
                         @else
                             <div class="w-full h-24 flex items-center justify-center bg-gray-700 text-white text-3xl">
                                 {{ $item['org_initial'] }} </div>
@@ -120,7 +126,7 @@
                         <a href="{{ route('detail.news', $item['slug']) }}"
                             class="bg-white shadow rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
                             <div class="h-48 w-full overflow-hidden rounded-t-xl"> <img src="{{ $item['filegambar'] }}"
-                                    class="w-full h-full object-cover" onerror="this.src='/default-news.png'"> </div>
+                                    class="w-full h-full object-cover" onerror="this.src='/default-news.png'"/> </div>
                             <div class="p-4 flex-1 flex flex-col">
                                 <p class="text-sm text-gray-500"> {{ $item['tgl'] }} </p>
                                 <h3 class="text-lg font-semibold mt-1 line-clamp-2"> {{ $item['judul'] }} </h3>
@@ -145,7 +151,7 @@
                         <div class="bg-white shadow rounded-xl overflow-hidden hover:shadow-xl transition-all"> <a
                                 href="javascript:;">
                                 <div class="h-48 w-full overflow-hidden"> <img src="{{ $item->image_url }}"
-                                        class="w-full h-full object-cover" alt="{{ $item->title }}"> </div>
+                                        class="w-full h-full object-cover" alt="{{ $item->title }}"/> </div>
                                 <div class="p-4">
                                     <h3 class="font-semibold text-lg line-clamp-2"> {{ $item->title }} </h3>
                                     <p class="text-sm text-gray-500 mt-2">
@@ -156,7 +162,10 @@
                 </div>
             @endif
         </section>
-    </div> @endsection @push('custom-scripts')
+    </div>
+@endsection 
+
+@push('custom-scripts')
     <script>
         const items = document.querySelectorAll(".card-item");
         const perPage = 6;
