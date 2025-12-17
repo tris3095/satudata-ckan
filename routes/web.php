@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([CountVisitorByIP::class])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/groups/{groups}', [HomeController::class, 'groups'])->name('group.show');
 
     Route::prefix('dataset')->group(function () {
         Route::get('/', [DatasetController::class, 'index'])->name('dataset.index');

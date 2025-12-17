@@ -14,32 +14,33 @@
 @endpush
 
 @section('content')
-    <section class="mx-0"
-        x-data="{
-                active: 0,
-                total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
-                init() {
-                        setInterval(() => { this.active = (this.active + 1) % this.total }, 5000)
-                        }
-                }">
+    <section class="mx-0" x-data="{
+        active: 0,
+        total: {{ $banner->isNotEmpty() ? $banner->count() : 1 }},
+        init() {
+            setInterval(() => { this.active = (this.active + 1) % this.total }, 5000)
+        }
+    }">
         <div class="inset-0 relative w-full h-full">
             @if ($banner->isNotEmpty())
                 <template x-for="(item, index) in {{ $banner->toJson() }}">
                     <div x-show="active === index" x-transition.opacity class="absolute inset-0 w-full h-full">
-                        <img src="item.image_url" class="w-full h-full object-cover"/>
+                        <img src="item.image_url" class="w-full h-full object-cover" />
                     </div>
                 </template>
             @else
                 <div x-show="active === 0" x-transition.opacity class=" inset-0">
-                    <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0"/>
+                    <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0" />
                 </div>
             @endif
-            
+
             @if ($banner->isNotEmpty())
-                <button @click="active = active === 0 ? total - 1 : active - 1" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
+                <button @click="active = active === 0 ? total - 1 : active - 1"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
                     <i class="bi bi-chevron-left"></i>
                 </button>
-                <button @click="active = (active + 1) % total" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
+                <button @click="active = (active + 1) % total"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full">
                     <i class="bi bi-chevron-right"></i>
                 </button>
             @endif
@@ -48,7 +49,8 @@
         @if ($banner->isNotEmpty())
             <div class="flex gap-3 justify-center mt-4">
                 <template x-for="index in total">
-                    <button @click="active = index - 1" :class="active === index - 1 ? 'bg-blue-600' : 'bg-white/50'" class="w-3 h-3 rounded-full border border-white">
+                    <button @click="active = index - 1" :class="active === index - 1 ? 'bg-blue-600' : 'bg-white/50'"
+                        class="w-3 h-3 rounded-full border border-white">
                     </button>
                 </template>
             </div>
@@ -68,7 +70,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($groups as $group)
-                    {{-- <a href="{{ route('group.show', $group['name']) }}"> --}} <a href="#">
+                    <a href="{{ route('group.show', $group['name']) }}">
                         <div
                             class="group-card flex items-center gap-4 p-6 bg-white rounded-xl shadow hover:shadow-md transition">
                             <div class="p-3 bg-red-100 rounded-lg text-red-600 text-2xl"> <i
@@ -94,7 +96,7 @@
                         <!-- Thumbnail -->
                         @if ($item['thumbnail'])
                             <img src="{{ $item['thumbnail'] }}" class="rounded-full object-cover"
-                                style="width: 120px; height: 120px;"/>
+                                style="width: 120px; height: 120px;" />
                         @else
                             <div class="w-full h-24 flex items-center justify-center bg-gray-700 text-white text-3xl">
                                 {{ $item['org_initial'] }} </div>
@@ -126,7 +128,7 @@
                         <a href="{{ route('detail.news', $item['slug']) }}"
                             class="bg-white shadow rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
                             <div class="h-48 w-full overflow-hidden rounded-t-xl"> <img src="{{ $item['filegambar'] }}"
-                                    class="w-full h-full object-cover" onerror="this.src='/default-news.png'"/> </div>
+                                    class="w-full h-full object-cover" onerror="this.src='/default-news.png'" /> </div>
                             <div class="p-4 flex-1 flex flex-col">
                                 <p class="text-sm text-gray-500"> {{ $item['tgl'] }} </p>
                                 <h3 class="text-lg font-semibold mt-1 line-clamp-2"> {{ $item['judul'] }} </h3>
@@ -151,7 +153,7 @@
                         <div class="bg-white shadow rounded-xl overflow-hidden hover:shadow-xl transition-all"> <a
                                 href="javascript:;">
                                 <div class="h-48 w-full overflow-hidden"> <img src="{{ $item->image_url }}"
-                                        class="w-full h-full object-cover" alt="{{ $item->title }}"/> </div>
+                                        class="w-full h-full object-cover" alt="{{ $item->title }}" /> </div>
                                 <div class="p-4">
                                     <h3 class="font-semibold text-lg line-clamp-2"> {{ $item->title }} </h3>
                                     <p class="text-sm text-gray-500 mt-2">
@@ -163,7 +165,7 @@
             @endif
         </section>
     </div>
-@endsection 
+@endsection
 
 @push('custom-scripts')
     <script>

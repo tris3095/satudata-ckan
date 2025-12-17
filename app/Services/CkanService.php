@@ -178,4 +178,22 @@ class CkanService
 
         return $response->json()['result'] ?? null;
     }
+
+    public function groupDatasets($page = 1, $perPage = 10, $keyword = null)
+    {
+
+        $start = ($page - 1) * $perPage;
+        $response = Http::get($this->baseUrl . '/api/3/action/package_search', [
+            'fq' => "groups:$keyword",
+            'start' => $start,
+            'rows' =>  100,
+        ]);
+
+        $datasets = collect($response['result']['results']);
+
+        return [
+            'items' => $datasets,
+            'total' => $response['result']['count'] ?? 0,
+        ];
+    }
 }

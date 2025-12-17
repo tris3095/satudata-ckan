@@ -39,4 +39,21 @@ class HomeController extends Controller
 
         return view('home', compact('banner', 'news', 'groups', 'infographics', 'records'));
     }
+
+    public function groups($groups)
+    {
+
+        $page = request()->get('page', 1);
+        $perPage = 10;
+        $keyword = request()->get('fq:groups', $groups);
+
+
+        $data = $this->ckan->groupDatasets($page, $perPage, $groups);
+
+        return view('dataset.datagroup', [
+            'items' => $data['items'],
+            'total' => $data['total'],
+
+        ]);
+    }
 }

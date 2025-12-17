@@ -17,7 +17,7 @@ class GeoportalService
             return [];
         }
 
-        $data = $response->json();
+
 
         // memastikan respons berupa array
         $data = $response->json();
