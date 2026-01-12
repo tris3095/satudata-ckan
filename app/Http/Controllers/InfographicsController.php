@@ -9,7 +9,7 @@ class InfographicsController extends Controller
 {
     public function index()
     {
-        $datas = Infographic::orderBy('published_at', 'DESC')->paginate(12);
+        $datas = Infographic::orderBy('created_at', 'DESC')->paginate(12);
 
         return view('infographics.index', compact('datas'));
     }

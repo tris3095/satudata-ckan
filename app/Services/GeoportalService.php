@@ -11,32 +11,41 @@ class GeoportalService
     protected $baseUrl2 = "https://geoportal.sumselprov.go.id/geoserver/palapa/wms/reflect";
     public function getAll()
     {
-        $response = Http::get($this->baseUrl);
+        try {
+            $response = Http::get($this->baseUrl);
 
-        if (!$response->successful()) {
-            return [];
+            if (!$response->successful()) {
+                return [];
+            }
+
+
+
+            // memastikan respons berupa array
+            $data = $response->json();
+
+            // Format setiap item
+            return collect($data)->map(function ($item) {
+                // --- 1. Ambil layer name dari links
+                $layer = $this->parseLayerName($item['links'] ?? '');
+
+                // --- 2. Build URL Thumbnail (jika ada layer)
+                $item['thumbnail'] = $layer
+                    ? "{$this->baseUrl2}?layers={$layer}"
+                    : null;
+
+                // --- 3. Generate inisial organisasi
+                $item['org_initial'] = $this->generateInitial($item['organization'] ?? 'Unknown');
+
+                return $item;
+            })->toArray();
+        } catch (\Exception $e) {
+            // kalau server mati / tidak bisa diakses
+            return [
+                'error' => true,
+                'message' => 'Server tidak dapat diakses: ' . $e->getMessage(),
+                'data' => []
+            ];
         }
-
-
-
-        // memastikan respons berupa array
-        $data = $response->json();
-
-        // Format setiap item
-        return collect($data)->map(function ($item) {
-            // --- 1. Ambil layer name dari links
-            $layer = $this->parseLayerName($item['links'] ?? '');
-
-            // --- 2. Build URL Thumbnail (jika ada layer)
-            $item['thumbnail'] = $layer
-                ? "{$this->baseUrl2}?layers={$layer}"
-                : null;
-
-            // --- 3. Generate inisial organisasi
-            $item['org_initial'] = $this->generateInitial($item['organization'] ?? 'Unknown');
-
-            return $item;
-        })->toArray();
     }
     private function parseLayerName(string $links)
     {

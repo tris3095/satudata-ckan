@@ -37,14 +37,22 @@ class Banner extends Model
 
     public function getImageUrlAttribute()
     {
-        return Storage::url('public/banner/' . $this->image_path);
+        if (!$this->image_path) {
+            return asset('images/default.png');;
+        }
+
+        if (!Storage::disk('public')->exists('banner/' . $this->image_path)) {
+            return asset('images/default.png');
+        }
+
+        return asset('storage/banner/' . $this->image_path);
     }
 
     public function getPeriodeActiveAttribute()
     {
         $now   = Carbon::now();
-        $start = Carbon::parse($this->start_date);
-        $end   = Carbon::parse($this->end_date);
+        $start = Carbon::parse($this->start_date)->startOfDay();
+        $end   = Carbon::parse($this->end_date)->endOfDay();
 
         return $now->between($start, $end);
     }
@@ -55,17 +63,41 @@ class Banner extends Model
             return 'text-dark';
         }
 
-        return $this->periode_active ? 'text-success' : 'text-danger';
+        return $this->periode_active ? 'text-green-700' : 'text-red-700';
     }
 
     public function getPeriodeDisplayAttribute()
     {
         if ($this->is_active == 1) {
-            return 'Tidak terbatas';
+            return [
+                'periode' => 'Tidak terbatas',
+                'status'  => '',
+            ];
         }
 
-        return Carbon::parse($this->start_date)->translatedFormat('d F Y')
+        $now   = Carbon::now();
+        $start = Carbon::parse($this->start_date)->startOfDay();
+        $end   = Carbon::parse($this->end_date)->endOfDay();
+
+        $periode = $start->translatedFormat('d F Y')
             . ' - ' .
-            Carbon::parse($this->end_date)->translatedFormat('d F Y');
+            $end->translatedFormat('d F Y');
+
+        if ($now->between($start, $end)) {
+            return [
+                'periode' => $periode,
+                'status'  => 'Masa tayang aktif',
+            ];
+        }
+
+        return [
+            'periode' => $periode,
+            'status'  => 'Masa tayang berakhir',
+        ];
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->is_active ? 'Aktif' : 'Sesuai Periode';
     }
 }

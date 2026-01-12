@@ -23,11 +23,14 @@
     }">
         <div class="inset-0 relative w-full h-full">
             @if ($banner->isNotEmpty())
-                <template x-for="(item, index) in {{ $banner->toJson() }}">
-                    <div x-show="active === index" x-transition.opacity class="absolute inset-0 w-full h-full">
-                        <img src="item.image_url" class="w-full h-full object-cover" />
+                @foreach ($banner as $index => $item)
+                    {{-- <div class="absolute inset-0 w-full h-full {{ $loop->first ? '' : 'hidden' }}">
+                        <img src="{{ $item->image_url }}" class="w-full h-full object-cover" />
+                    </div> --}}
+                    <div x-show="active === 0" x-transition.opacity class=" inset-0">
+                        <img src="{{ $item->image_url }}" class="w-full h-full bg-cover" />
                     </div>
-                </template>
+                @endforeach
             @else
                 <div x-show="active === 0" x-transition.opacity class=" inset-0">
                     <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0" />
@@ -69,7 +72,7 @@
                 <h2 class="text-3xl font-bold"> <span class="text-red-600">Topik </span>Data </h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($groups as $group)
+                {{-- @foreach ($groups as $group)
                     <a href="{{ route('group.show', $group['name']) }}">
                         <div
                             class="group-card flex items-center gap-4 p-6 bg-white rounded-xl shadow hover:shadow-md transition">
@@ -79,7 +82,7 @@
                                 {{ $group['title'] ?? ($group['display_name'] ?? $group['name']) }} </h3>
                         </div>
                     </a>
-                @endforeach
+                @endforeach --}}
             </div>
         </section>
         {{-- ========================= --}} {{-- GEOPORTAL SUMSEL SECTION --}} {{-- ========================= --}}
@@ -91,7 +94,7 @@
                     Lihat Semua <i class="bi bi-arrow-right"></i> </a>
             </div> <!-- Grid Card -->
             <div id="recordGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($records as $item)
+                {{-- @foreach ($records as $item)
                     <div class="bg-white shadow rounded-lg overflow-hidden card-item justify-center mb-4"">
                         <!-- Thumbnail -->
                         @if ($item['thumbnail'])
@@ -112,7 +115,7 @@
                                 Detail </a>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
         </section>
         <section class="max-w-7xl mx-auto mt-10 px-4">
@@ -157,7 +160,7 @@
                                 <div class="p-4">
                                     <h3 class="font-semibold text-lg line-clamp-2"> {{ $item->title }} </h3>
                                     <p class="text-sm text-gray-500 mt-2">
-                                        {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }} </p>
+                                        {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }} </p>
                                 </div>
                             </a> </div>
                     @endforeach

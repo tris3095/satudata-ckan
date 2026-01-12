@@ -54,6 +54,25 @@
             });
         });
     </script>
+
+    <script>
+        const btn = document.getElementById('loginMenuButton');
+        const menu = document.getElementById('loginMenu');
+
+        // toggle dropdown saat tombol diklik
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // cegah event bubbling
+            menu.classList.toggle('hidden');
+        });
+
+        // klik di luar menu → hide
+        document.addEventListener('click', function(e) {
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
 </body>
 
 </html>

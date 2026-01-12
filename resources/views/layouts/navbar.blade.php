@@ -11,7 +11,7 @@
 
             <li>
                 <a href="{{ route('home.index') }}"
-                    class="{{ request()->routeIs('home.*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
+                    class="{{ request()->routeIs('home.*') || request()->routeIs('group.*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
                     Home
                 </a>
             </li>
@@ -73,10 +73,41 @@
         </ul>
 
         <!-- Login Button -->
-        <a href="#"
-            class="hidden md:block bg-red-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-700 transition">
-            Login
-        </a>
+        <div class="relative inline-block text-left">
+            <button type="button"
+                class="hidden md:block bg-red-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-700 transition cursor-pointer"
+                id="loginMenuButton">
+                Login
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="loginMenu"
+                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                <ul class="py-1">
+                    <li>
+                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Login Operator Satu Data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://103.239.165.103/user/login"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Login Operator CKAN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Login Operator Geodata Peta
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Login Operator Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Mobile Button -->
         <button class="md:hidden text-gray-700 text-3xl">

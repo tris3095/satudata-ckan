@@ -33,7 +33,7 @@ class HomeController extends Controller
         $news = $this->newsService->getNews();
         $groups = $this->ckan->listGroups(true);
         $records = $this->geoportal->getAll();
-        $infographics = Infographic::orderBy('published_at', 'DESC')
+        $infographics = Infographic::orderBy('created_at', 'DESC')
             ->take(8)
             ->get();
 

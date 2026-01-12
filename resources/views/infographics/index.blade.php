@@ -34,7 +34,7 @@
                                         </h3>
 
                                         <p class="text-sm text-gray-500 mt-2">
-                                            {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
+                                            {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                                         </p>
                                     </div>
                                 </a>

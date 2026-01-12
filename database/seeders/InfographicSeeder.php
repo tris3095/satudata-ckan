@@ -18,37 +18,31 @@ class InfographicSeeder extends Seeder
                 'title' => 'Inflasi Oktober 2024 Year on Year (yoy) Provinsi Sumatera Selatan Sebesar 1,09 Persen',
                 'image' => 'inflasi-oktober-2024.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-10-20',
             ],
             [
                 'title' => 'Data Kemiskinan Sumatera Selatan',
                 'image' => 'kemiskinan-sumsel.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-09-28',
             ],
             [
                 'title' => 'Perkembangan Nilai Tukar Petani',
                 'image' => 'ntp-sumsel.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-09-18',
             ],
             [
                 'title' => 'Luas Panen dan Produksi Padi Provinsi Sumatera Selatan 2024',
                 'image' => 'padi-sumsel-2024.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-08-30',
             ],
             [
                 'title' => 'Perkembangan Ekspor dan Impor Sumatera Selatan September 2024',
                 'image' => 'ekspor-impor-sept-2024.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-09-30',
             ],
             [
                 'title' => 'Pertumbuhan Ekonomi Provinsi Sumatera Selatan Triwulan III-2024',
                 'image' => 'pertumbuhan-ekonomi-q3-2024.jpg',
                 'source' => 'BPS Sumatera Selatan',
-                'published_at' => '2024-11-05',
             ]
         ];
 
@@ -57,7 +51,7 @@ class InfographicSeeder extends Seeder
                 'title'        => $item['title'],
                 'image'    => $item['image'],
                 'source'       => $item['source'],
-                'published_at' => $item['published_at'],
+                'is_active' => 1,
             ]);
         }
     }

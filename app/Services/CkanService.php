@@ -163,11 +163,29 @@ class CkanService
 
     public function listGroups($allFields = true)
     {
-        $response = Http::get($this->baseUrl . '/api/3/action/group_list', [
-            'all_fields' => $allFields
-        ]);
+        try {
+            $response = Http::timeout(10) // batas waktu request
+                ->get($this->baseUrl . '/api/3/action/group_list', [
+                    'all_fields' => $allFields
+                ]);
 
-        return $response->json()['result'] ?? [];
+            // cek apakah response sukses
+            if ($response->successful()) {
+                return $response->json()['result'] ?? [];
+            }
+
+            // jika server balas error (500, 404, dll)
+            return [
+                'error' => true,
+                'message' => 'Server merespon dengan status: ' . $response->status()
+            ];
+        } catch (\Exception $e) {
+            // jika server mati / tidak bisa diakses
+            return [
+                'error' => true,
+                'message' => 'Server tidak dapat diakses: ' . $e->getMessage()
+            ];
+        }
     }
 
     public function getGroup($id)
