@@ -48,8 +48,22 @@
                     <a href="{{ route('news.index') }}"
                         class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Berita
                         Sumsel</a>
+                    <a href="#"
+                        class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Berita
+                        Resmi Statistik</a>
+                    <a href="#"
+                        class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Produk
+                        Statistik OPD</a>
+                    <a href="#"
+                        class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Metadata
+                        Statistik </a>
+                    <a href="#"
+                        class="block px-4 py-2 {{ request()->is('publikasi/berita*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Geoportal
+                    </a>
                     <a href="{{ route('infographics.index') }}"
                         class="block px-4 py-2 {{ request()->is('publikasi/infografis*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Infografis</a>
+                    <a href="{{ route('infographics.index') }}"
+                        class="block px-4 py-2 {{ request()->is('publikasi/infografis*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">Webinar</a>
                 </div>
             </li>
 
@@ -60,14 +74,15 @@
                 </button>
                 <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 w-48">
                     <a href="{{ route('tentang.profil') }}" class="block px-4 py-2 hover:text-red-600">Profil</a>
-                    <a href="{{ route('tentang.struktur') }}" class="block px-4 py-2 hover:text-red-600">Struktur</a>
+
+                    <a href="#" class="block px-4 py-2 hover:text-red-600">Regulasi SDI</a>
                 </div>
             </li>
 
             <li>
-                <a href="https://data.go.id/regulation" target="_blank"
+                <a href="https://splpd.sumselprov.go.id" target="_blank"
                     class="{{ request()->is('regulasi*') ? 'text-red-600 font-semibold' : 'hover:text-red-600' }}">
-                    Regulasi SDI
+                    Interopabilitas
                 </a>
             </li>
         </ul>

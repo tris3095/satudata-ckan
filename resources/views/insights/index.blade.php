@@ -16,7 +16,9 @@
                     <div
                         class="flex items-center gap-4 bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition">
 
-                        <img src="{{ asset($item->icon) }}" alt="{{ $item->title }}" class="w-14 h-14 object-contain">
+                        {{-- <img src="{{ asset($item->icon) }}" alt="{{ $item->title }}" class="w-14 h-14 object-contain"> --}}
+                        <div class="p-3 bg-red-100 rounded-lg text-red-600 text-2xl"> <i alt="{{ $item->title }}"
+                                class="{{ $item->icon }} w-14 h-14 object-contain"></i> </div>
 
                         <h3 class="text-lg font-semibold">{{ $item->title }}</h3>
                     </div>
