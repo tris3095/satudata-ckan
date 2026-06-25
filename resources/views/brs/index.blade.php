@@ -1,0 +1,55 @@
+@extends('layouts.app')
+
+@section('title', 'Berita Sumsel')
+
+@section('content')
+    <main class="mb-6">
+        <!-- Hero Section -->
+        <section class="hero max-w-7xl mx-auto py-8">
+            <div class="px-3 md:px-5 relative">
+                <h1 class="text-2xl md:text-4xl font-bold text-red-600">Berita <span class="text-black">Resmi Statistik</span>
+                </h1>
+                <p class="text-lg md:text-2xl">Provinsi Sumatera Selatan</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="max-w-7xl mx-auto">
+            <!-- <div class="p-6"> -->
+            <div class="section-content px-3 md:px-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    @foreach ($datas as $item)
+                        <div class="bg-white shadow rounded-lg overflow-hidden flex flex-col">
+                            <img src="{{ asset('storage/brs/' . $item->image_path) }}" alt="{{ $item->judul }}"
+                                class="w-full h-48 object-cover">
+
+                            <div class="p-4 flex flex-col flex-grow">
+                                <small class="text-gray-500 mb-1">
+                                    <i class="flaticon-calendar mr-1"></i>
+                                    {{ \Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y') }}
+                                </small>
+
+                                <h5 class="text-lg font-semibold mb-4">
+                                    {{ $item->title }}
+                                </h5>
+
+                                <a href="{{ route('detail.brs', ['slug' => $item->slug]) }}"
+                                    class="mt-auto inline-block border border-red-600 text-red-600 px-3 py-2 rounded text-sm hover:bg-red-600 hover:text-white transition">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+                <div class="my-6">
+                    {{ $datas->links('pagination::tailwind') }}
+                </div>
+            </div>
+            <!-- </div> -->
+        </section>
+    </main>
+
+@endsection

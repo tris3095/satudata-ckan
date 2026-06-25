@@ -16,3 +16,30 @@ if (! function_exists('group_icon')) {
         };
     }
 }
+
+if (! function_exists('mask_pribadi')) {
+    /**
+     * Mask personal sensitive data (NIK, Email, Phone, Name, etc.)
+     *
+     * @param string $value The text or string to be masked
+     * @param string $type The specific type (e.g. 'nik', 'email', 'phone', 'name') or 'auto' for pattern matching in text.
+     * @return string
+     */
+    function mask_pribadi($value, $type = 'auto')
+    {
+        if (empty($value)) {
+            return $value;
+        }
+
+        try {
+            $service = app(\App\Services\DataMaskingService::class);
+            if ($type === 'auto') {
+                return $service->maskText($value);
+            }
+            return $service->maskStringAuto($value, $type);
+        } catch (\Exception $e) {
+            return $value;
+        }
+    }
+}
+

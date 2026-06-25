@@ -54,6 +54,62 @@
             });
         });
     </script>
+
+    <script>
+        const loginMenuButton = document.getElementById('loginMenuButton');
+        const loginMenu = document.getElementById('loginMenu');
+        const loginModal = document.getElementById('loginModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const loginIframe = document.getElementById('loginIframe');
+
+        // Toggle dropdown
+        loginMenuButton.addEventListener('click', () => {
+            loginMenu.classList.toggle('hidden');
+        });
+
+        // Setiap link login
+        document.querySelectorAll('.login-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url =
+                    "https://surveidigital.spbe.go.id/embed/survey/eyJzdXJ2ZXlfaWQiOjIsInNlcnZpY2VfaWQiOjcxLCJob3N0Ijoic3Vtc2VscHJvdi5nby5pZCxzdW1zZWxwcm92MjAyMi5kZXYsc2F0dWRhdGEtY2thbi5kZXYsc2F0dWRhdGEuc3Vtc2VscHJvdi5nby5pZCIsImtleSI6IjE2VHlMaXN4In0=/embed/view/"
+                loginIframe.src = url; // set iframe src
+                loginModal.classList.remove('hidden');
+                loginMenu.classList.add('hidden'); // tutup dropdown
+            });
+        });
+
+        // Tutup modal
+        closeLoginModal.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+            loginIframe.src = ''; // reset iframe
+        });
+
+        // Tutup modal jika klik luar
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.add('hidden');
+                loginIframe.src = '';
+            }
+        });
+
+        const btn = document.getElementById('loginMenuButton');
+        const menu = document.getElementById('loginMenu');
+
+        // toggle dropdown saat tombol diklik
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // cegah event bubbling
+            menu.classList.toggle('hidden');
+        });
+
+        // klik di luar menu → hide
+        document.addEventListener('click', function(e) {
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+    @stack('custom-footer')
 </body>
 
 </html>

@@ -6,6 +6,7 @@ use App\Models\Visitor;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,12 +25,23 @@ class AppServiceProvider extends ServiceProvider
     {
         $today = Carbon::today();
 
-        View::share([
-            'totalVisitors'   => Visitor::count(),
-            'todayVisitors'   => Visitor::whereDate('visited_at', $today)->count(),
-            'monthlyVisitors' => Visitor::whereMonth('visited_at', $today->month)
-                ->whereYear('visited_at', $today->year)->count(),
-            'yearlyVisitors'  => Visitor::whereYear('visited_at', $today->year)->count(),
-        ]);
+        try {
+            DB::connection()->getPdo();
+
+            View::share([
+                'totalVisitors'   => Visitor::count(),
+                'todayVisitors'   => Visitor::whereDate('visited_at', $today)->count(),
+                'monthlyVisitors' => Visitor::whereMonth('visited_at', $today->month)
+                    ->whereYear('visited_at', $today->year)->count(),
+                'yearlyVisitors'  => Visitor::whereYear('visited_at', $today->year)->count(),
+            ]);
+        } catch (\Exception $e) {
+            View::share([
+                'totalVisitors'   => 0,
+                'todayVisitors'   => 0,
+                'monthlyVisitors' => 0,
+                'yearlyVisitors'  => 0,
+            ]);
+        }
     }
 }

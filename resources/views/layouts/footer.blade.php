@@ -12,25 +12,64 @@
 
             <!-- Brand -->
             <div>
-                <h2 class="text-2xl font-bold text-white">Satu Data Sumsel</h2>
+                <h2 class="text-2xl font-bold text-white">SATU DATA SUMSEL</h2>
                 <p class="text-white mt-3">
-                    Portal resmi penyediaan data terpadu, akurat, mutakhir dan dapat dipertanggungjawabkan untuk
-                    Provinsi Sumatera Selatan.
+                    Portal Satu Data Sumsel merupakan pusat integrasi dan penyebarluasan data Pemerintah Provinsi
+                    Sumatera Selatan yang menjamin data akurat, mutakhir, terstandar, dan dapat dipertanggungjawabkan
+                    untuk mewujudkan transparansi serta akuntabilitas.
                 </p>
             </div>
 
             <!-- Kontak -->
             <div>
-                <h3 class="text-xl font-semibold text-white mb-3">Kontak</h3>
+                <h3 class="text-xl font-semibold text-white mb-3">KONTAK</h3>
                 <ul class="space-y-2 text-white">
                     <li>Dinas Kominfo Provinsi Sumatera Selatan</li>
                     <li>Jl. Kapten A. Rivai, Palembang</li>
-                    <li>Email: kominfo@sumselprov.go.id</li>
+                    <li>Email : satudata@sumselprov.go.id</li>
+                    <li>
+
+                        <i class="bi bi-instagram"></i>&nbsp;@satudatasumsel<br>
+
+                    </li>
+                    <li>
+                        <i class="bi bi-globe"></i>&nbsp;satudata.sumselprov.go.id<br>
+
+                    </li>
+                    <li> <i class="bi bi-facebook"></i> &nbsp;Dinas Kominfo Sumsel
+
+                    </li>
+                    <li><i class="bi bi-twitter"></i>&nbsp;
+                        @sumsel_maju<br>
+                        &nbsp; &nbsp;&nbsp;&nbsp; @diskominfosumsel
+                    </li>
+                    <li><i class="bi bi-youtube"></i> &nbsp;Diskominfo Sumsel</li>
+
+
+
+                    {{-- <a href="https://www.facebook.com/pengelolaan.publik/" target="_blank"
+                            class="hover:text-white transition transform hover:scale-110" title="Pengelolaan Publik"><i
+                                class="bi bi-facebook"></i></a>&nbsp;
+                        <a href="https://www.facebook.com/sumselmaju1/" target="_blank"
+                            class="hover:text-white transition transform hover:scale-110" title="Sumsel Maju"><i
+                                class="bi bi-facebook"></i></a>&nbsp;
+                        <a href="https://twitter.com/diskominfoss" target="_blank"
+                            class="hover:text-white transition transform hover:scale-110" title="Diskominfoss"><i
+                                class="bi bi-twitter"></i></a>&nbsp; --}}
+
+                    {{-- <a href="https://twitter.com/sumsel_maju" target="_blank"
+                        class="hover:text-white transition transform hover:scale-110" title="Sumsel Maju"><i
+                            class="bi bi-twitter"></i></a>&nbsp;
+
+                    <a href="https://www.youtube.com/diskominfosumsel/" target="_blank"
+                        class="hover:text-white transition transform hover:scale-110" title="Diskominfo Sumsel"><i
+                            class="bi bi-youtube"></i></a>
+                    </li> --}}
                 </ul>
             </div>
 
             <div>
-                <h3 class="text-xl font-semibold text-white mb-3">Statistik Pengunjung</h3>
+                <h3 class="text-xl font-semibold text-white mb-3">STATISTIK PENGUNJUNG</h3>
                 <div>
                     <p class="text-white text-sm">Total Pengunjung</p>
                     <p class="text-3xl font-bold text-white">

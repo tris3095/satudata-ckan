@@ -25,7 +25,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
 
                 @foreach ($datasets as $item)
-                    <a href="{{ route('dataset.show', $item['name']) }}"
+                    <a href="https://opendata.sumselprov.go.id/group/{{ $item['name'] }}"
                         class="block bg-white rounded-xl shadow hover:shadow-lg transition p-5">
 
                         <h3 class="font-semibold text-lg mb-2">

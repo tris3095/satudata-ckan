@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan *)",
+      "Bash(php -l app/Http/Controllers/SurveiController.php)",
+      "Bash(netstat -ano)",
+      "Bash(php -l app/Http/Controllers/Admin/SurveiJawabanController.php)",
+      "Bash(xargs -I{} echo {})",
+      "Bash(php -l app/Livewire/PrsComponent.php)",
+      "Bash(php -l app/Models/ProdukStatistik.php)",
+      "Bash(npm run *)",
+      "Bash(php -l resources/views/livewire/prs-component.blade.php)",
+      "Bash(grep -v \"^$\")",
+      "Bash(git status *)"
+    ]
+  }
+}

@@ -21,3 +21,8 @@
   animation: marquee 25s linear infinite;
 }
 
+label.required::after {
+    content: " *";
+    color: #dc3545; 
+    font-weight: bold;
+}
