@@ -937,18 +937,12 @@
         });
 
         // Tutup modal
-        closeLoginModal.addEventListener('click', () => {
-            loginModal.classList.add('hidden');
-            loginIframe.src = ''; // reset iframe
-        });
-
-        // Tutup modal jika klik luar
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
+        if (closeLoginModal && loginModal && loginIframe) {
+            closeLoginModal.addEventListener('click', () => {
                 loginModal.classList.add('hidden');
                 loginIframe.src = '';
-            }
-        });
+            });
+        }
 
         const btn = document.getElementById('loginMenuButton');
         const menu = document.getElementById('loginMenu');
