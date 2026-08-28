@@ -87,6 +87,36 @@
                             @enderror
                         </div>
 
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Link Materi
+                            </label>
+                            <input wire:model.lazy="materi_link" type="url"
+                                class="w-full border rounded-md p-2
+                                @error('materi_link') border-red-500 @enderror"
+                                placeholder="https://...">
+                            @error('materi_link')
+                                <span class="text-sm text-red-500 mt-1 block">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Link E-Sertifikat
+                            </label>
+                            <input wire:model.lazy="certificate_link" type="url"
+                                class="w-full border rounded-md p-2
+                                @error('certificate_link') border-red-500 @enderror"
+                                placeholder="https://...">
+                            @error('certificate_link')
+                                <span class="text-sm text-red-500 mt-1 block">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
                         @if ($status === '0')
                             <div>
                                 <label class="required block text-sm font-medium text-gray-700 mb-1">
@@ -158,6 +188,8 @@
                         <th class="px-4 py-3">Gambar</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Periode</th>
+                        <th class="px-4 py-3">Materi</th>
+                        <th class="px-4 py-3">E-Sertifikat</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
@@ -179,6 +211,22 @@
                             <td class="px-4 py-3 {{ $item->periode_color }}">
                                 {{ $item->periode_display['periode'] }} <br>
                                 {{ $item->periode_display['status'] }}
+                            </td>
+                            <td class="px-4 py-3">
+                                @if ($item->materi_link)
+                                    <a href="{{ $item->materi_link }}" target="_blank" rel="noopener"
+                                        class="text-indigo-600 hover:text-indigo-700 hover:underline">Unduh</a>
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-3">
+                                @if ($item->certificate_link)
+                                    <a href="{{ $item->certificate_link }}" target="_blank" rel="noopener"
+                                        class="text-indigo-600 hover:text-indigo-700 hover:underline">Unduh</a>
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-center gap-3">

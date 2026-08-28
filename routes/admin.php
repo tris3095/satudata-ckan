@@ -29,6 +29,7 @@ Route::middleware(PreventBackHistory::class)->group(function () {
         Route::resource('/brs', StatisticNewsController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/produk', ProdukStatistikController::class);
+        Route::get('/webmin', [DashboardController::class, 'webmin'])->name('dashboard.webmin');
         Route::get('/survei-pertanyaan', [SurveiPertanyaanController::class, 'index'])->name('survei-pertanyaan.index');
         Route::get('/survei-jawaban', [SurveiJawabanController::class, 'index'])->name('survei-jawaban.index');
         Route::get('/profile', [AuthenticatorController::class, 'editProfile'])->name('profile');

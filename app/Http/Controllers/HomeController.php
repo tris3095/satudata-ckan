@@ -11,21 +11,25 @@ use App\Services\SumselNewsService;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
 use App\Services\GeoportalService;
+use App\Services\EsakipService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Database\QueryException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {
     protected SumselNewsService $newsService;
     protected CkanService $ckan;
     protected GeoportalService $geoportal;
+    protected EsakipService $esakip;
 
-    public function __construct(SumselNewsService $newsService, CkanService $ckan, GeoportalService $geoportal)
+    public function __construct(SumselNewsService $newsService, CkanService $ckan, GeoportalService $geoportal, EsakipService $esakip)
     {
         $this->newsService = $newsService;
         $this->ckan = $ckan;
         $this->geoportal = $geoportal;
+        $this->esakip = $esakip;
     }
 
     public function index()
@@ -36,12 +40,12 @@ class HomeController extends Controller
         $news = $this->newsService->getNews();
         $groups = $this->ckan->listGroups(true);
 
-        $records = $this->geoportal->getAll();
+        $records = $this->geoportal->getAll(3);
         $infografis = Infographic::orderBy('created_at', 'DESC')
             ->take(4)
             ->get();
         $infographics = Infographic::orderBy('created_at', 'DESC')
-            ->take(8)
+            ->take(4)
             ->get();
 
         return view('home', compact('banner', 'news', 'groups', 'infographics', 'infografis', 'records'));
@@ -380,5 +384,34 @@ class HomeController extends Controller
             }
         }
         return view('metadata.show', get_defined_vars());
+    }
+
+    public function esakipDocuments(Request $request)
+    {
+        $page = (int) $request->get('page', 1);
+        $filters = [
+            'berkas' => $request->get('berkas'),
+            'year' => $request->get('year'),
+        ];
+
+        $result = $this->esakip->getDocuments($page, $filters);
+
+        $error = $result['error'] ?? false;
+        $items = $result['data'] ?? [];
+
+        $documents = new LengthAwarePaginator(
+            $items,
+            $result['total'] ?? count($items),
+            $result['per_page'] ?? 10,
+            $result['current_page'] ?? $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('esakip.index', [
+            'documents' => $documents,
+            'error' => $error,
+            'message' => $result['message'] ?? null,
+            'filters' => $filters,
+        ])->with('title', 'Dokumen E-SAKIP');
     }
 }

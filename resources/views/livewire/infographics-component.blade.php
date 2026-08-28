@@ -180,5 +180,9 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="px-4 py-3">
+            {{ $this->datas->links('pagination::tailwind') }}
+        </div>
     </div>
 </div>

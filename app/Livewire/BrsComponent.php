@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 
 class BrsComponent extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     public $titlePage;
     public $title,  $description, $file, $slug, $size, $rilis_date, $status, $materi;
     public $showModal = false;
@@ -45,7 +47,7 @@ class BrsComponent extends Component
 
     public function getDatasProperty()
     {
-        return StatisticNews::latest()->get();
+        return StatisticNews::latest()->paginate(10)->withPath(route('admin.brs.index', [], false));
     }
 
     public function updated($propertyName)

@@ -2,6 +2,79 @@
 
 @section('title', 'Survei Kepuasan Konsumen')
 
+@push('custom-style')
+    <style>
+        .modal_survey {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content_survey {
+            position: relative;
+            background-color: #fff;
+            margin: 2vh auto;
+            border-radius: 12px;
+            width: 95vw;
+            max-width: 1100px;
+            height: 96vh;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .close-btn_survey {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 10;
+            color: #6b7280;
+        }
+
+        .close-btn_survey:hover {
+            color: #111827;
+        }
+
+        #resultIframe {
+            flex: 1 1 auto;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-content_survey.iframe-active_survey {
+            padding: 0;
+        }
+
+        .modal-content_survey.iframe-active_survey #modalTitle,
+        .modal-content_survey.iframe-active_survey #modalMessage {
+            display: none;
+        }
+
+        .modal-content_survey.iframe-active_survey .close-btn_survey {
+            top: 12px;
+            right: 16px;
+            background: #fff;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+@endpush
+
 @section('content')
     <main class="mb-12">
         <!-- Hero Section -->
@@ -14,14 +87,36 @@
                 <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
                     Silakan Bapak/Ibu menilai kepuasan layanan Portal Satu Data Sumsel. Pendapat Anda sangat membantu
                     kami meningkatkan kualitas layanan.
+
+                    <br>
+                    <button
+                        style="padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; background-color: #007BFF; color: white; border: none;">
+                        <a style="color: white" href="#" onclick='return mulai_survey()'>Mulai Survei</a>
+                    </button>
                 </p>
             </div>
         </section>
 
         <!-- Content Section -->
-        <section class="max-w-3xl mx-auto px-6">
 
-            @if (session('success'))
+        <section class="max-w-3xl mx-auto px-6">
+            {{-- <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-10 text-center text-gray-500">
+                Survei belum tersedia saat ini.
+            </div> --}}
+            <div id="statusModal" class="row modal_survey">
+                <div class="modal-content_survey">
+                    <span class="close-btn_survey">&times;</span>
+                    <h3 id="modalTitle">Berikan Penilaian Terbaik Anda...</h3>
+
+                    <p id="modalMessage"></p>
+
+                    <iframe id="resultIframe" style="display: none;"></iframe>
+                </div>
+            </div>
+            </div>
+            {{-- <iframe id="resultIframe" style="width: 100%; height: inherit; border: none; display: false;"></iframe> --}}
+
+            {{-- @if (session('success'))
                 <div class="mb-6 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 text-green-700 px-4 py-3">
                     <i class="bi bi-check-circle-fill text-xl mt-0.5"></i>
                     <p>{{ session('success') }}</p>
@@ -153,10 +248,48 @@
                         </div>
                     </form>
                 </div>
-            @endif
+            @endif --}}
         </section>
     </main>
+    <script>
+        // untuk survey ===================
+        function mulai_survey() {
+            const modal = document.getElementById('statusModal');
+            const modalContent = modal.querySelector('.modal-content_survey');
+            const modalTitle = document.getElementById('modalTitle');
+            const resultIframe = document.getElementById('resultIframe');
+            const respondentNameInput = document.getElementById('respondent_name');
 
+            resultIframe.style.display = 'none';
+            modalContent.className = 'modal-content_survey';
+            modal.style.display = "block";
+
+            modalTitle.textContent = "Berikan Penilaian Terbaik Anda...";
+
+            resultIframe.src =
+                "https://surveidigital.spbe.go.id/embed/survey/eyJzdXJ2ZXlfaWQiOjIsInNlcnZpY2VfaWQiOjcyNSwiaG9zdCI6Imh0dHBzOi8vc2F0dWRhdGEuc3Vtc2VscHJvdi5nby5pZCIsImtleSI6IlQwTWZMS20zIn0=/embed/view/?jenis_layanan=satudata";
+            resultIframe.style.display = 'block';
+            respondentNameInput.value = '';
+
+            modalMessage.style.display = 'none';
+            modalContent.className = 'modal-content_survey success_survey iframe-active_survey';
+            modal.style.display = "block";
+        }
+
+        const modal = document.getElementById('statusModal');
+        const closeBtn = modal.querySelector('.close-btn_survey');
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        // untuk survey ===================
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const gateInputs = document.querySelectorAll('.gate-question');

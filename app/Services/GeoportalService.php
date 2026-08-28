@@ -9,7 +9,7 @@ class GeoportalService
 {
     private $baseUrl = 'https://geoportal.sumselprov.go.id/api/record/publik';
     protected $baseUrl2 = "https://geoportal.sumselprov.go.id/geoserver/palapa/wms/reflect";
-    public function getAll()
+    public function getAll($limit = null)
     {
         try {
             $response = Http::timeout(10)->get($this->baseUrl);
@@ -23,8 +23,13 @@ class GeoportalService
             // memastikan respons berupa array
             $data = $response->json();
 
+            $collection = collect($data);
+            if ($limit) {
+                $collection = $collection->take($limit);
+            }
+
             // Format setiap item
-            return collect($data)->map(function ($item) {
+            return $collection->map(function ($item) {
                 // --- 1. Ambil layer name dari links
                 $layer = $this->parseLayerName($item['links'] ?? '');
 

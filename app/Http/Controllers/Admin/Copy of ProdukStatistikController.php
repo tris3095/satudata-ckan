@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
 
 class ProdukStatistikController extends Controller
 {
@@ -48,10 +47,7 @@ class ProdukStatistikController extends Controller
             $rules = [
                 'title' => 'required',
                 'description' => 'nullable',
-                'isbn' => 'nullable',
-                'no_katalog' => 'nullable',
-                'tanggal_rilis' => 'nullable',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10480',
+
                 'document' => 'nullable|mime:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,image/jpeg,image/png,image/gif,image/bmp',
             ];
 
@@ -60,52 +56,32 @@ class ProdukStatistikController extends Controller
                 'document.mimes'              => 'Format file harus berupa pdf, doc, docx, xls, xlsx, ppt, pptx, jpg, png, gif, bmp, jpeg.',
             ];
 
+
+
             $validator = Validator::make($request->all(), $rules, $messages);
+
             if ($validator->fails()) {
                 return response()->json([
                     'error'  => "Gagal  menyimpan data",
                     'errors' => $validator->errors()
                 ]);
-            }
-
-            $filename = null;
-            if ($request->hasFile('document')) {
-                $filename = time() . '.' . $request->file('document')->extension();
+            } else {
+                $filename = time() . '.' . $request->file->extension();
                 Storage::putFileAs($this->link, $request->file("document"), $filename);
+
+                $brs->title      = $request->title;
+                $brs->slug = Str::slug($request->title);
+                $brs->document = $filename;
+
+                $brs->description = $request->description;
+                $brs->is_active  = $request->is_active;
+                $brs->user_id    =  Auth::id();
+                $brs->save();
+
+                return response()->json(['success' => 'Data berhasil ditambah']);
             }
-
-            $imageName = null;
-            if ($request->hasFile('thumbnail')) {
-                $thumbnail = $request->file('thumbnail');
-                $imageName = time() . '.' . $thumbnail->extension();
-                Storage::putFileAs($this->link, $request->file("thumbnail"), $imageName);
-                // $materi = Timestamp::now() . '.' . $request->materi->extension();
-                //Storage::putFileAs($this->link, $request->file("materi"), $materi);
-
-                // $img = Image::read($thumbnail->path());
-                // $img->scale(width: 100, height: 100);
-                // Storage::disk('public')->makeDirectory('prs/thumbnail');
-                // $img->save(Storage::disk('public')->path('prs/thumbnail/' . $imageName));
-            }
-
-            $brs->title      = $request->title;
-            $brs->slug = Str::slug($request->title);
-            $brs->document = $filename;
-            $brs->isbn = $request->isbn;
-            $brs->nomor_katalog = $request->no_katalog;
-            $brs->tanggal_rilis = $request->tanggal_rilis;
-            $brs->thumbnail = $imageName;
-
-
-            $brs->description = $request->description;
-            $brs->is_active  = $request->is_active;
-            $brs->user_id    =  Auth::id();
-            $brs->save();
-
-            return response()->json(['success' => 'Data berhasil ditambah']);
         }
     }
-
     /**
      * Display the specified resource.
      */
@@ -135,7 +111,6 @@ class ProdukStatistikController extends Controller
                 'description' => 'nullable',
 
                 'document' => 'nullable|mime:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,image/jpeg,image/png,image/gif,image/bmp',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10480',
             ];
 
             $messages = [
@@ -150,39 +125,27 @@ class ProdukStatistikController extends Controller
                     'error'  => "Gagal  menyimpan data",
                     'errors' => $validator->errors()
                 ]);
-            }
-
-            $brs->title = $request->title;
-            if ($request->hasFile('document')) {
-                $filename = time() . '.' . $request->file('document')->extension();
-                Storage::delete($this->link . $brs->document);
-                Storage::putFileAs($this->link, $request->file("document"), $filename);
-                $brs->document = $filename;
-            }
-
-            if ($request->hasFile('thumbnail')) {
-                if ($brs->thumbnail && Storage::disk('public')->exists('prs/thumbnail/' . $brs->thumbnail)) {
-                    Storage::disk('public')->delete('prs/thumbnail/' . $brs->thumbnail);
+            } else {
+                $brs->title = $request->title;
+                if ($request->file("document") != "") {
+                    $filename = time() . '.' . $request->file->extension();
+                    Storage::delete($this->link . $brs->document);
+                    Storage::putFileAs($this->link, $request->file("document"), $filename);
+                    $brs->document = $filename;
                 }
-                $thumbnail = $request->file('thumbnail');
-                $imageName = time() . '.' . $thumbnail->extension();
-                $img = Image::read($thumbnail->path());
-                $img->scale(width: 100, height: 100);
-                Storage::disk('public')->makeDirectory('prs/thumbnail');
-                $img->save(Storage::disk('public')->path('prs/thumbnail/' . $imageName));
-                $brs->thumbnail = $imageName;
+
+
+
+                $brs->slug = Str::slug($request->title);
+
+
+                $brs->description = $request->description;
+                $brs->is_active  = $request->is_active;
+                $brs->user_id    =  Auth::id();
+                $brs->save();
+
+                return response()->json(['success' => 'Data berhasil diubah']);
             }
-
-            $brs->slug = Str::slug($request->title);
-            $brs->isbn = $request->isbn;
-            $brs->nomor_katalog = $request->no_katalog;
-            $brs->tanggal_rilis = $request->tanggal_rilis;
-            $brs->description = $request->description;
-            $brs->is_active  = $request->is_active;
-            $brs->user_id    =  Auth::id();
-            $brs->save();
-
-            return response()->json(['success' => 'Data berhasil diubah']);
         }
     }
 
@@ -193,9 +156,6 @@ class ProdukStatistikController extends Controller
     {
         if ($request->ajax()) {
             Storage::delete($this->link . $prs->document);
-            if ($prs->thumbnail && Storage::disk('public')->exists('prs/thumbnail/' . $prs->thumbnail)) {
-                Storage::disk('public')->delete('prs/thumbnail/' . $prs->thumbnail);
-            }
             ProdukStatistik::destroy($prs->id);
 
             return response()->json(['success' => 'Data berhasil dihapus']);

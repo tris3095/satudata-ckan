@@ -22,4 +22,17 @@ class DashboardController extends Controller
             'infographicCount',
         ))->with('title', 'Dasbor');
     }
+
+    public function webmin()
+    {
+        $userCount   = User::count();
+        $bannerCount = Banner::count();
+        $infographicCount   = Infographic::count();
+
+        return view('admin.pages.monitor', compact(
+            'userCount',
+            'bannerCount',
+            'infographicCount',
+        ))->with('title', 'Webmin');
+    }
 }

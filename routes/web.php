@@ -42,6 +42,7 @@ Route::middleware([CountVisitorByIP::class])->group(function () {
         Route::get('/prs/{id}', [ProdukStatistikController::class, 'detail'])->name('detail.prs');
         Route::get('/brs/{slug}', [StatisticNewsController::class, 'detail'])->name('detail.brs');
         Route::get('/webinar', [WebinarController::class, 'index'])->name('webinar.index');
+        Route::get('/dokumen-esakip', [HomeController::class, 'esakipDocuments'])->name('esakip.documents');
     });
     Route::get('/ckan-download', [DatasetController::class, 'download'])->name('dataset.download');
     Route::prefix('survei')->group(function () {

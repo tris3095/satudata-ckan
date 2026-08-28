@@ -36,6 +36,8 @@ class WebinarController extends Controller
             $rules = [
                 'title' => 'required',
                 'file'  => 'required|image',
+                'materi_link' => 'nullable|url',
+                'certificate_link' => 'nullable|url',
             ];
 
             $messages = [
@@ -45,6 +47,8 @@ class WebinarController extends Controller
                 'start_date.required'       => 'Tanggal mulai wajib diisi jika status sesuai periode.',
                 'end_date.required'         => 'Tanggal selesai wajib diisi jika status sesuai periode.',
                 'end_date.after_or_equal'   => 'Tanggal selesai tidak boleh lebih awal dari tanggal mulai.',
+                'materi_link.url'           => 'Link materi harus berupa URL yang valid.',
+                'certificate_link.url'      => 'Link e-sertifikat harus berupa URL yang valid.',
             ];
 
             if ($request->input('is_active') == 0) {
@@ -63,12 +67,13 @@ class WebinarController extends Controller
                 $filename = time() . '.' . $request->file->extension();
                 Storage::putFileAs($this->link, $request->file("file"), $filename);
 
-                $webinar->title      = $request->title;
-                $webinar->image_path = $filename;
-                $webinar->link_url   = $request->link_url;
-                $webinar->is_active  = $request->is_active;
-                $webinar->start_date = $request->start_date;
-                $webinar->end_date   = $request->end_date;
+                $webinar->title             = $request->title;
+                $webinar->image_path        = $filename;
+                $webinar->is_active         = $request->is_active;
+                $webinar->start_date        = $request->start_date;
+                $webinar->end_date          = $request->end_date;
+                $webinar->materi_link       = $request->materi_link;
+                $webinar->certificate_link  = $request->certificate_link;
                 $webinar->save();
 
                 return response()->json(['success' => 'Data berhasil ditambah']);
@@ -94,6 +99,8 @@ class WebinarController extends Controller
             $rules = [
                 'title' => 'required',
                 'file'  => 'image',
+                'materi_link' => 'nullable|url',
+                'certificate_link' => 'nullable|url',
             ];
 
             $messages = [
@@ -102,6 +109,8 @@ class WebinarController extends Controller
                 'start_date.required'     => 'Tanggal mulai wajib diisi jika status sesuai periode.',
                 'end_date.required'       => 'Tanggal selesai wajib diisi jika status sesuai periode.',
                 'end_date.after_or_equal' => 'Tanggal selesai tidak boleh lebih awal dari tanggal mulai.',
+                'materi_link.url'         => 'Link materi harus berupa URL yang valid.',
+                'certificate_link.url'    => 'Link e-sertifikat harus berupa URL yang valid.',
             ];
 
             if ($request->input('is_active') == 0) {
@@ -124,7 +133,6 @@ class WebinarController extends Controller
                     Storage::putFileAs($this->link, $request->file("file"), $filename);
                     $webinar->image_path = $filename;
                 }
-                $webinar->link_url   = $request->link_url;
                 $webinar->is_active  = $request->is_active;
                 if ($request->input('is_active') == 0) {
                     $webinar->start_date = $request->start_date;
@@ -133,6 +141,8 @@ class WebinarController extends Controller
                     $webinar->start_date = null;
                     $webinar->end_date   = null;
                 }
+                $webinar->materi_link      = $request->materi_link;
+                $webinar->certificate_link = $request->certificate_link;
                 $webinar->save();
 
                 return response()->json(['success' => 'Data berhasil diubah']);

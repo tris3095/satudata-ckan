@@ -6,10 +6,12 @@ use App\Models\Infographic;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class InfographicsComponent extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     public $titlePage;
     public $title, $file, $status, $source;
     public $showModal = false;
@@ -37,7 +39,7 @@ class InfographicsComponent extends Component
 
     public function getDatasProperty()
     {
-        return Infographic::latest()->get();
+        return Infographic::latest()->paginate(10)->withPath(route('admin.infographic.index', [], false));
     }
 
     public function updated($propertyName)
@@ -86,11 +88,11 @@ class InfographicsComponent extends Component
 
         try {
             if ($this->file) {
-                if ($this->oldImage && Storage::disk('public')->exists('infographics/' . $this->oldImage)) {
-                    Storage::disk('public')->delete('infographics/' . $this->oldImage);
+                if ($this->oldImage && Storage::disk('public')->exists('infographic/' . $this->oldImage)) {
+                    Storage::disk('public')->delete('infographic/' . $this->oldImage);
                 }
                 $filename = time() . '.' . $this->file->getClientOriginalExtension();
-                $this->file->storeAs('infographics', $filename, 'public');
+                $this->file->storeAs('infographic', $filename, 'public');
             } else {
                 $filename = $this->oldImage;
             }
@@ -131,8 +133,8 @@ class InfographicsComponent extends Component
         try {
             $data = Infographic::findOrFail($id);
 
-            if ($data->image && Storage::disk('public')->exists('infographics/' . $data->image)) {
-                Storage::disk('public')->delete('infographics/' . $data->image);
+            if ($data->image && Storage::disk('public')->exists('infographic/' . $data->image)) {
+                Storage::disk('public')->delete('infographic/' . $data->image);
             }
 
             $data->delete();

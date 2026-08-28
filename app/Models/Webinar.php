@@ -14,6 +14,8 @@ class Webinar extends Model
         'is_active',
         'start_date',
         'end_date',
+        'materi_link',
+        'certificate_link',
     ];
 
     protected $casts = [

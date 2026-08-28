@@ -12,7 +12,7 @@ class WebinarComponent extends Component
 {
     use WithFileUploads;
     public $titlePage;
-    public $title, $file, $status, $start_date, $end_date;
+    public $title, $file, $status, $start_date, $end_date, $materi_link, $certificate_link;
     public $showModal = false;
     public $editId = null;
     public $oldImage = null;
@@ -25,6 +25,8 @@ class WebinarComponent extends Component
         'status' => 'required|boolean',
         'start_date' => 'nullable',
         'end_date'  => 'nullable',
+        'materi_link' => 'nullable|url|max:255',
+        'certificate_link' => 'nullable|url|max:255',
     ];
 
     protected $messages = [
@@ -39,6 +41,8 @@ class WebinarComponent extends Component
         'end_date.required'   => 'Tanggal selesai wajib diisi.',
         'end_date.date'       => 'Tanggal selesai harus berupa format tanggal yang valid.',
         'end_date.after_or_equal' => 'Tanggal selesai tidak boleh lebih awal dari tanggal mulai.',
+        'materi_link.url'     => 'Link materi harus berupa URL yang valid.',
+        'certificate_link.url' => 'Link e-sertifikat harus berupa URL yang valid.',
     ];
 
     public function getDatasProperty()
@@ -53,7 +57,7 @@ class WebinarComponent extends Component
 
     public function openModal()
     {
-        $this->reset(['title', 'file', 'oldImage', 'status', 'start_date', 'end_date', 'editId']);
+        $this->reset(['title', 'file', 'oldImage', 'status', 'start_date', 'end_date', 'materi_link', 'certificate_link', 'editId']);
         $this->resetValidation();
         $this->showModal = true;
     }
@@ -72,6 +76,8 @@ class WebinarComponent extends Component
         $this->status   = $data->is_active ? '1' : '0';
         $this->start_date = $data->start_date ? $data->start_date->format('Y-m-d') : null;
         $this->end_date = $data->end_date ? $data->end_date->format('Y-m-d') : null;
+        $this->materi_link = $data->materi_link;
+        $this->certificate_link = $data->certificate_link;
         $this->oldImage = $data->image_path;
 
         $this->resetValidation();
@@ -88,6 +94,8 @@ class WebinarComponent extends Component
                     'status' => 'required|boolean',
                     'start_date' => 'required|date',
                     'end_date'  => 'required|date|after_or_equal:start_date',
+                    'materi_link' => 'nullable|url|max:255',
+                    'certificate_link' => 'nullable|url|max:255',
                 ]);
             } else {
                 $this->validate([
@@ -96,6 +104,8 @@ class WebinarComponent extends Component
                     'status' => 'required|boolean',
                     'start_date' => 'nullable',
                     'end_date'  => 'nullable',
+                    'materi_link' => 'nullable|url|max:255',
+                    'certificate_link' => 'nullable|url|max:255',
                 ]);
             }
         }
@@ -107,6 +117,8 @@ class WebinarComponent extends Component
                 'status' => 'required|boolean',
                 'start_date' => 'required|date',
                 'end_date'  => 'required|date|after_or_equal:start_date',
+                'materi_link' => 'nullable|url|max:255',
+                'certificate_link' => 'nullable|url|max:255',
             ]);
         } else {
             $this->validate([
@@ -115,6 +127,8 @@ class WebinarComponent extends Component
                 'status' => 'required|boolean',
                 'start_date' => 'nullable',
                 'end_date'  => 'nullable',
+                'materi_link' => 'nullable|url|max:255',
+                'certificate_link' => 'nullable|url|max:255',
             ]);
         }
 
@@ -137,6 +151,8 @@ class WebinarComponent extends Component
                     'is_active' => $this->status,
                     'start_date' => $this->status == 1 ? null : $this->start_date,
                     'end_date'   => $this->status == 1 ? null : $this->end_date,
+                    'materi_link' => $this->materi_link,
+                    'certificate_link' => $this->certificate_link,
                 ]
             );
 

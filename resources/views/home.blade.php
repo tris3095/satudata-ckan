@@ -91,12 +91,20 @@
                         <img src="{{ $item->image_url }}" class="w-full h-full object-cover" />
                     </div> --}}
                     <div x-show="active === 0" x-transition.opacity class=" inset-0">
-                        <img src="{{ $item->image_url }}" class="w-full h-full bg-cover" />
+                        <video class="w-full h-auto object-cover" autoplay muted loop playsinline>
+                            <source src="{{ asset('storage/banner/banner.mp4') }}" type="video/mp4">
+                            Browser Anda tidak mendukung video.
+                        </video>
+                        {{-- <img src="{{ $item->image_url }}" class="w-full h-full bg-cover" /> --}}
                     </div>
                 @endforeach
             @else
                 <div x-show="active === 0" x-transition.opacity class=" inset-0">
-                    <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0" />
+                    <video class="w-full h-auto object-cover" autoplay muted loop playsinline>
+                        <source src="{{ asset('storage/banner/banner.mp4') }}" type="video/mp4">
+                        Browser Anda tidak mendukung video.
+                    </video>
+                    {{-- <img src="{{ asset('images/satu-data.jpeg') }}" class="w-full h-full bg-center bg-cover p-0" /> --}}
                 </div>
             @endif
 
@@ -249,6 +257,10 @@
                     <a href="https://svelte-descan.vercel.app/" target="_blank" class="flex-shrink-0">
                         <img src="https://svelte-descan.vercel.app/images/logo/logofont.png"
                             class="h-[50px] w-auto object-contain  logo-20" alt="Desa Bumi Sriwijaya">
+                    </a>
+                    <a href="https://esakip.sumselprov.go.id/" target="_blank" class="flex-shrink-0">
+                        <img src="{{ asset('storage/link') }}/sakip.png" class="h-[50px] w-auto object-contain logo-20"
+                            alt="esakip">
                     </a>
                 </div>
             </div>

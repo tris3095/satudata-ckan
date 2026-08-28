@@ -20,11 +20,11 @@ class Infographic extends Model
             return asset('images/default.png');;
         }
 
-        if (!Storage::disk('public')->exists('infographics/' . $this->image)) {
+        if (!Storage::disk('public')->exists('infographic/' . $this->image)) {
             return asset('images/default.png');
         }
 
-        return asset('storage/infographics/' . $this->image);
+        return asset('storage/infographic/' . $this->image);
     }
 
     public function getStatusAttribute()

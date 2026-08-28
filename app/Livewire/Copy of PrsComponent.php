@@ -138,7 +138,7 @@ class PrsComponent extends Component
                 $this->editId ? 'Data berhasil diubah' : 'Data berhasil disimpan'
             );
         } catch (\Throwable $e) {
-            $this->notify('error', 'Gagal menyimpan data: ' . $e->getMessage());
+            $this->notify('error', 'Gagal menyimpan data' . $e->getMessage());
         }
     }
 
