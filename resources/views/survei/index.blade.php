@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Survei Kepuasan Konsumen')
+@section('title', 'Survei Kepuasan Masyarakat')
 
 @push('custom-style')
     <style>
@@ -80,10 +80,13 @@
         <!-- Hero Section -->
         <section class="hero max-w-7xl mx-auto py-10">
             <div class="px-6 relative text-center">
+                <img src="{{ asset('images/logo-kemenpan-rb.png') }}"
+                    alt="Logo Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi"
+                    class="mx-auto mb-6 h-auto object-contain" style="width: 200px; max-width: 100%;">
                 <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 text-red-600 mb-4">
                     <i class="bi bi-clipboard2-heart text-3xl"></i>
                 </div>
-                <h1 class="text-4xl font-bold text-red-600">Survei <span class="text-black">Kepuasan Konsumen</span></h1>
+                <h1 class="text-4xl font-bold text-red-600">Survei <span class="text-black">Kepuasan Masyarakat</span></h1>
                 <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
                     Silakan Bapak/Ibu menilai kepuasan layanan Portal Satu Data Sumsel. Pendapat Anda sangat membantu
                     kami meningkatkan kualitas layanan.

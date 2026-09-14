@@ -16,38 +16,32 @@
         <section class="max-w-7xl mx-auto">
 
             {{-- Search Bar --}}
-            <form method="GET" action="{{ route('dataset.index') }}" class="mb-6">
+            {{-- <form method="GET" action="{{ route('dataset.index') }}" class="mb-6">
                 <input type="text" name="q" value="{{ $keyword }}" placeholder="Cari dataset..."
                     class="w-full md:w-1/2 px-4 py-2 border rounded-lg focus:ring focus:border-blue-500">
-            </form>
+            </form> --}}
 
             {{-- Dataset Grid --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
 
-                @foreach ($datasets as $item)
-                    <a href="https://opendata.sumselprov.go.id/group/{{ $item['name'] }}"
-                        class="block bg-white rounded-xl shadow hover:shadow-lg transition p-5">
-
-                        <h3 class="font-semibold text-lg mb-2">
-                            {{ $item['title'] ?? $item['name'] }}
-                        </h3>
-
-                        <p class="text-gray-600 text-sm mb-3">
-                            {{ Str::limit($item['notes'] ?? 'No description.', 100) }}
-                        </p>
-
-                        <span class="inline-block text-blue-600 text-sm font-medium">
-                            Lihat Detail →
-                        </span>
+                @foreach ($datasets as $group)
+                    <a href="{{ route('group.show', $group['name']) }}">
+                        <div
+                            class="group-card flex items-center gap-4 p-6 bg-white rounded-xl shadow hover:shadow-md transition">
+                            <div class="p-3 bg-red-100 rounded-lg text-red-600 text-2xl"> <i
+                                    class="{{ group_icon($group['name']) }}"></i> </div>
+                            <h3 class="text-lg font-semibold">
+                                {{ $group['title'] ?? ($group['display_name'] ?? $group['name']) }} </h3>
+                        </div>
                     </a>
                 @endforeach
 
             </div>
 
             {{-- Pagination --}}
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 {{ $datasets->appends(['q' => $keyword])->links() }}
-            </div>
+            </div> --}}
         </section>
     </main>
 @endsection

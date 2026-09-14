@@ -41,6 +41,12 @@ class HomeController extends Controller
         $groups = $this->ckan->listGroups(true);
 
         $records = $this->geoportal->getAll(3);
+        // GeoportalService fails soft with ['error' => true, ...] when the
+        // remote server is unreachable — treat that as "no data" so the
+        // homepage simply hides the section instead of rendering an error.
+        if (!is_array($records) || isset($records['error'])) {
+            $records = [];
+        }
         $infografis = Infographic::orderBy('created_at', 'DESC')
             ->take(4)
             ->get();
@@ -49,6 +55,45 @@ class HomeController extends Controller
             ->get();
 
         return view('home', compact('banner', 'news', 'groups', 'infographics', 'infografis', 'records'));
+    }
+
+    public function geospatial(Request $request)
+    {
+        $page = max(1, (int) $request->get('page', 1));
+        $perPage = 9;
+        $result = $this->geoportal->getAll();
+        $error = isset($result['error']) && $result['error'];
+        $allRecords = $error ? ($result['data'] ?? []) : $result;
+
+        $records = new LengthAwarePaginator(
+            array_slice($allRecords, ($page - 1) * $perPage, $perPage),
+            count($allRecords),
+            $perPage,
+            $page,
+            [
+                'path' => $request->url(),
+                'query' => $request->query(),
+            ]
+        );
+
+        return view('geospatial.index', [
+            'records' => $records,
+            'error' => $error,
+            'message' => $result['message'] ?? null,
+        ]);
+    }
+
+    public function groupsList()
+    {
+
+
+        $data = $this->ckan->listGroups();
+
+        return view('dataset.index', [
+            'datasets' => $data,
+
+
+        ]);
     }
 
     public function groups($groups)

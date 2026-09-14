@@ -11,7 +11,7 @@ class SurveiPertanyaanController extends Controller
     {
         $datas = SurveiPertanyaan::urut()->paginate(10);
 
-        return view('admin.pages.survei-pertanyaan.index', compact('datas'))->with('title', 'Survei Kepuasan Konsumen');
+        return view('admin.pages.survei-pertanyaan.index', compact('datas'))->with('title', 'Survei Kepuasan Masyarakat');
     }
 
     public function create()

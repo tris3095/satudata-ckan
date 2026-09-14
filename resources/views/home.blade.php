@@ -27,12 +27,73 @@
             animation: marquee 35s linear infinite;
         }
 
+        .regional-logo-marquee img {
+            width: auto !important;
+            height: 80px !important;
+        }
+
+        @keyframes regional-logo-scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(calc(-50% - 1.25rem));
+            }
+        }
+
+        .regional-marquee-track {
+            animation: regional-logo-scroll 45s linear infinite;
+            will-change: transform;
+        }
+
+        .regional-logo-set {
+            flex-shrink: 0;
+        }
+
+        .regional-logo-marquee:hover .regional-marquee-track {
+            animation-play-state: paused;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .regional-marquee-track {
+                animation-play-state: paused;
+            }
+        }
+
         .logo-20 {
             @apply flex items-center justify-center h-[20px] flex-shrink-0;
         }
 
         .logo-20 img {
             @apply h-full w-auto object-contain grayscale transition duration-300 hover:grayscale-0 hover:scale-110;
+        }
+
+        @theme {
+            --animate-marquee: marquee 35s linear infinite;
+
+            @keyframes marquee {
+                from {
+                    transform: translateX(0);
+                }
+
+                to {
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+
+
+        .animate-marquee {
+            animation: marquee 35s linear infinite;
         }
     </style>
 @endpush
@@ -45,9 +106,7 @@
         </div>
 
         <!-- Modal Wrapper -->
-        <div x-show="open" x-transition class="fixed inset-0 z-50 flex items-center justify-center px-4">
-
-            <!-- Modal -->
+        <div x-show="open" x-transition class="fixed  -->
             <div class="bg-white w-full max-w-md rounded-lg shadow-xl
                    flex flex-col overflow-hidden">
 
@@ -130,11 +189,165 @@
             </div>
         @endif
     </section>
-    <div class="overflow-hidden bg-gray-100 border-t border-b">
+    {{-- <div class="overflow-hidden bg-gray-100 border-t border-b">
         <div class="whitespace-nowrap text-red-700 font-semibold py-2 animate-marquee-delay"> Hubungi HELP CENTER Whatsapp
             0812-6463-3386 Pusat Bantuan Layanan Data Statistik Sektoral Provinsi Sumatera Selatan
         </div>
+    </div> --}}
+
+    <div class="regional-logo-marquee w-full overflow-hidden py-6">
+        <div class="relative">
+
+            <div class="regional-marquee-track flex w-max gap-10">
+
+                {{-- Set pertama --}}
+                <div id="regionalLogoSource" class="regional-logo-set flex items-center gap-10">
+
+                    <a href="http://satudata.okukab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//XpAtpzVEPvPKg0LRt2T7fD7vzFL9w5Z0BxQ9pdC5.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo OKU">
+                    </a>
+
+                    <a href="http://portal-data.kaboki.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//qBgXbz9TZCr6dEXkmEKNnQUQR644yTT9Wt2b4A55.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo OKI">
+                    </a>
+
+                    <a href="http://satudata.muaraenimkab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//c8znEbK0XdM0u3PMPm0I4XqL4QcW9lJrGEkJ6xON.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Muara Enim">
+                    </a>
+
+                    <a href="http://satudata.lahatkab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//scJuX9tPcpUgMfB66tOS1zTqFH3sYAkQmRFUrqDh.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Lahat">
+                    </a>
+
+                    <a href="http://satudata.musirawaskab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//dEmLAC0SijuoOuJQEA3uD8ZCa61mUofSc5cdyDIu.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Musi Rawas">
+                    </a>
+
+                    <a href="https://satudata.mubakab.go.id/" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//t5fcRimArVW8FvdsZjz0qeeOBuUfvn6Re7SIaktv.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Musi Banyuasin">
+                    </a>
+
+                    <a href="https://banyuasinkab.go.id/" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//vb7IcENdi5tVGJvkp7SH5afVokdYNmAa7z0uFEPe.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Banyuasin">
+                    </a>
+
+                    <a href="https://satudata.okutimurkab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//WeZ6PedRNAdshbHUK4Zr4u1RGPKVvQKsdsKa8kwW.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo OKU Timur">
+                    </a>
+
+                    <a href="https://satudata.okuselatankab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//mQ5WIRCkEpbNMXeO8Fu8coHwdu5gye6oGiRmwiV1.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo OKU Selatan">
+                    </a>
+
+                    <a href="http://satudata.oganilirkab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//7GyzCcKTbkvvNPk7FG3wE6WNuSqWy4qu19esUr9Q.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Ogan Ilir">
+                    </a>
+
+                    <a href="https://bankdata.bappedaempatlawang.info" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//PmtaoXmeTcoaGZRes4DvBcCWjqyoIFMHZMS06mct.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Empat Lawang">
+                    </a>
+
+                    <a href="https://satudata.palikab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//KljTWZJMvxsFrb3B2LQF38lnj1IsGiOusf4x3Gw2.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo">
+                    </a>
+
+                    <a href="https://satudata.muratarakab.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//bBgImqwgCvyLwObYV92GDvupBhoHPYUntulr0HCr.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Muratara">
+                    </a>
+
+                    <a href="http://satudata.palembang.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//oIFpGbA0B6zB9AGctEjDYvZLMNdP2bmRFMW4Bej2.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Palembang">
+                    </a>
+
+                    <a href="http://satudata.pagaralamkota.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//dl5KT7EhjuAcUjhexp6MklvHHqJVpRHxDDSbS4x0.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Pagar Alam">
+                    </a>
+
+                    <a href="https://ssc.lubuklinggaukota.go.id" target="_blank" rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//R3CISULoOMdUZv5aZpdCpaBwC8neJSojvH8TULIC.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Lubuklinggau">
+                    </a>
+
+                    <a href="https://satudata.kotaprabumulih.go.id/new/badan-statistik" target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex shrink-0 items-center justify-center transition duration-300 hover:scale-110">
+                        <img src="{{ asset('/storage/lambangdaerah//tJOKobzYkSFKZ3qPk70qErcP4YBp6lyNu0A5ljle.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="Logo Prabumulih">
+                    </a>
+
+                </div>
+
+                {{-- Duplikasi agar animasi infinite tidak putus --}}
+                <div id="regionalLogoClone" class="regional-logo-set flex items-center gap-10" aria-hidden="true">
+
+                    <a href="#" class="flex shrink-0 items-center justify-center">
+                        <img src="{{ asset('/storage/lambangdaerah//XpAtpzVEPvPKg0LRt2T7fD7vzFL9w5Z0BxQ9pdC5.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="">
+                    </a>
+
+                    <a href="#" class="flex shrink-0 items-center justify-center">
+                        <img src="{{ asset('/storage/lambangdaerah//qBgXbz9TZCr6dEXkmEKNnQUQR644yTT9Wt2b4A55.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="">
+                    </a>
+
+                    <a href="#" class="flex shrink-0 items-center justify-center">
+                        <img src="{{ asset('/storage/lambangdaerah//c8znEbK0XdM0u3PMPm0I4XqL4QcW9lJrGEkJ6xON.png') }}"
+                            class="h-[60px] w-[50px] object-contain" alt="">
+                    </a>
+
+                    {{-- lanjutkan copy semua logo dari set pertama --}}
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
+    <script>
+        (() => {
+            const source = document.getElementById('regionalLogoSource');
+            const clone = document.getElementById('regionalLogoClone');
+
+            if (!source || !clone) return;
+
+            clone.innerHTML = source.innerHTML;
+            clone.querySelectorAll('a').forEach(link => link.setAttribute('tabindex', '-1'));
+            clone.querySelectorAll('img').forEach(image => image.setAttribute('alt', ''));
+        })();
+    </script>
+
+
 
     <div class="mx-auto">
         <section class="max-w-7xl mx-auto mt-10 px-4">
@@ -156,22 +369,25 @@
                     </a> </div>
                 <div class="bg-white shadow rounded-xl overflow-hidden hover:shadow-xl transition-all"> <a
                         href="javascript:;">
-                        <div class="h-full w-full overflow-hidden"> <img src="{{ asset('storage/infographic/2033.jpeg') }}"
-                                class="w-full h-full object-cover" alt="Indikator" /> </div>
+                        <div class="h-full w-full overflow-hidden"> <img
+                                src="{{ asset('storage/infographic/2033.jpeg') }}" class="w-full h-full object-cover"
+                                alt="Indikator" /> </div>
 
                     </a> </div>
 
                 <div class="bg-white shadow rounded-xl overflow-hidden hover:shadow-xl transition-all"> <a
                         href="javascript:;">
-                        <div class="h-full w-full overflow-hidden"> <img src="{{ asset('storage/infographic/babb2.jpeg') }}"
-                                class="w-full h-full object-cover" alt="Help Center" /> </div>
+                        <div class="h-full w-full overflow-hidden"> <img
+                                src="{{ asset('storage/infographic/babb2.jpeg') }}" class="w-full h-full object-cover"
+                                alt="Help Center" /> </div>
 
                     </a> </div>
 
                 <div class="bg-white shadow rounded-xl overflow-hidden hover:shadow-xl transition-all"> <a
                         href="javascript:;">
-                        <div class="h-full w-full overflow-hidden"> <img src="{{ asset('storage/infographic/babb.jpeg') }}"
-                                class="w-full h-full object-cover" alt="Indikator" /> </div>
+                        <div class="h-full w-full overflow-hidden"> <img
+                                src="{{ asset('storage/infographic/babb.jpeg') }}" class="w-full h-full object-cover"
+                                alt="Indikator" /> </div>
 
                     </a> </div>
 
@@ -250,10 +466,7 @@
                             alt="Giwang">
                     </a>
 
-                    <a href="https://dashboard.sumselprov.go.id/" target="_blank" class="flex-shrink-0">
-                        <img src="{{ asset('storage/link') }}/link-dashboard.png" class="h-[50px] logo-20"
-                            alt="Dashboard Sumsel">
-                    </a>
+
                     <a href="https://svelte-descan.vercel.app/" target="_blank" class="flex-shrink-0">
                         <img src="https://svelte-descan.vercel.app/images/logo/logofont.png"
                             class="h-[50px] w-auto object-contain  logo-20" alt="Desa Bumi Sriwijaya">
@@ -262,50 +475,51 @@
                         <img src="{{ asset('storage/link') }}/sakip.png" class="h-[50px] w-auto object-contain logo-20"
                             alt="esakip">
                     </a>
+                    <a href="https://ampera.sumselprov.go.id/" target="_blank" class="flex-shrink-0">
+                        <img src="{{ asset('storage/link') }}/ampera.png" class="h-[50px] w-auto object-contain logo-20"
+                            alt="Ampera">
+                    </a>
                 </div>
             </div>
         </section>
 
         {{-- ========================= --}} {{-- GEOPORTAL SUMSEL SECTION --}} {{-- ========================= --}}
-        <section class="max-w-7xl mx-auto mt-10 px-4">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold"> <span class="text-red-600">Geo</span>spasial </h2><a
-                    href="https://geoportal.sumselprov.go.id/"
-                    class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
-                    Lihat Semua <i class="bi bi-arrow-right"></i> </a>
-            </div> <!-- Grid Card -->
-            <div id="recordGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @if (!empty($records))
+            <section class="max-w-7xl mx-auto mt-10 px-4">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="text-3xl font-bold"> <span class="text-red-600">Geo</span>spasial </h2><a
+                        href="{{ route('geospatial.index') }}"
+                        class="px-4 py-2 border rounded-xl flex items-center gap-2 hover:text-white hover:border-white hover:bg-red-600 transition">
+                        Lihat Semua <i class="bi bi-arrow-right"></i> </a>
+                </div> <!-- Grid Card -->
+                <div id="recordGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                @forelse ($records ?? [] as $item)
-                    <div class="bg-white shadow rounded-lg overflow-hidden card-item justify-center mb-4"">
-                        <!-- Thumbnail -->
-                        @if ($item['thumbnail'])
-                            <img src="{{ $item['thumbnail'] }}" class="rounded-full object-cover"
-                                style="width: 120px; height: 120px;" />
-                        @else
-                            <div class="w-full h-24 flex items-center justify-center bg-gray-700 text-white text-3xl">
-                                {{ $item['org_initial'] }} </div>
-                        @endif
-                        <div class="p-5">
-                            <h2 class="text-xl font-semibold text-gray-800 mb-2">
-                                {{ $item['title'] ?? 'Tidak ada judul' }}
-                            </h2>
-                            <p class="text-sm text-gray-500 mb-3"> <strong>Sumber:</strong>
-                                {{ $item['organization'] ?? 'Tidak diketahui' }} </p> <a
-                                href="https://geoportal.sumselprov.go.id/main/katalog" target="_blank"
-                                class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"> Lihat
-                                Detail </a>
+                    @foreach ($records as $item)
+                        <div class="bg-white shadow rounded-lg overflow-hidden card-item justify-center mb-4">
+                            <!-- Thumbnail -->
+                            @if ($item['thumbnail'])
+                                <img src="{{ $item['thumbnail'] }}" class="rounded-full object-cover"
+                                    style="width: 120px; height: 120px;" />
+                            @else
+                                <div class="w-full h-24 flex items-center justify-center bg-gray-700 text-white text-3xl">
+                                    {{ $item['org_initial'] }} </div>
+                            @endif
+                            <div class="p-5">
+                                <h2 class="text-xl font-semibold text-gray-800 mb-2">
+                                    {{ $item['title'] ?? 'Tidak ada judul' }}
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-3"> <strong>Sumber:</strong>
+                                    {{ $item['organization'] ?? 'Tidak diketahui' }} </p> <a
+                                    href="https://geoportal.sumselprov.go.id/main/katalog" target="_blank"
+                                    class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                    Lihat
+                                    Detail </a>
+                            </div>
                         </div>
-                    </div>
-                @empty
-                    <div class="bg-gray shadow rounded-lg overflow-hidden card-item justify-center mb-4 p-5">
-                        <div class="flex justifiy-between items-center mb-10">
-                            Failed to fetch geoportal data
-                        </div>
-                    </div>
-                @endforelse
-            </div>
-        </section>
+                    @endforeach
+                </div>
+            </section>
+        @endif
         <section class="max-w-7xl mx-auto mt-10 px-4">
             <div class="flex justify-between items-center mb-10">
                 <h2 class="text-3xl font-bold"> <span class="text-red-600">Berita</span> Terkini </h2> <a

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\CkanService;
-use Illuminate\Http\Request;
 
 class InstantionController extends Controller
 {
@@ -17,7 +16,7 @@ class InstantionController extends Controller
     public function index()
     {
         $page = request()->get('page', 1);
-        $perPage = 10;
+        $perPage = 12;
         $keyword = request()->get('q');
 
         $data = $this->ckan->paginatedOrganizations($page, $perPage, $keyword);
@@ -29,13 +28,13 @@ class InstantionController extends Controller
             $page,
             [
                 'path' => url('instansi'),
-                'query' => ['q' => $keyword]
+                'query' => ['q' => $keyword],
             ]
         );
 
         return view('instantion.index', [
             'instantions' => $paginator,
-            'keyword' => $keyword
+            'keyword' => $keyword,
         ]);
     }
 
@@ -43,7 +42,7 @@ class InstantionController extends Controller
     {
         $instantion = $this->ckan->getOrganization($id);
 
-        if (!$instantion) {
+        if (! $instantion) {
             abort(404);
         }
 
@@ -67,7 +66,10 @@ class InstantionController extends Controller
                 $data['total'],
                 $perPage,
                 $page,
-                ['path' => url()->current()]
+                [
+                    'path' => url()->current(),
+                    'query' => ['show' => 1],
+                ]
             );
         }
 

@@ -31,7 +31,8 @@
             <ul class="space-y-3">
                 @foreach ($datasets as $ds)
                     <li class="p-3 border rounded-lg bg-gray-50 hover:bg-gray-100 transition">
-                        <a href="{{ route('dataset.show', $ds['name']) }}" class="text-blue-600 font-medium">
+                        <a href="https://opendata.sumselprov.go.id/dataset/{{ $ds['name'] }}"
+                            class="text-blue-600 font-medium">
                             {{ $ds['title'] ?? $ds['name'] }}
                         </a>
 

@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([CountVisitorByIP::class])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/data/geospasial', [HomeController::class, 'geospatial'])->name('geospatial.index');
+
+    Route::get('/groups', [HomeController::class, 'groupsList'])->name('groups.list');
     Route::get('/groups/{groups}', [HomeController::class, 'groups'])->name('group.show');
 
     Route::prefix('dataset')->group(function () {
@@ -53,4 +56,16 @@ Route::middleware([CountVisitorByIP::class])->group(function () {
         Route::get('/profil', [TentangController::class, 'profil'])->name('tentang.profil');
         Route::get('/struktur', [TentangController::class, 'struktur'])->name('tentang.struktur');
     });
+    Route::view('/regulasi/dtsen', 'regulasi.dtsen')->name('regulasi.dtsen');
+    Route::view('/regulasi/geospasial', 'regulasi.geospasial')->name('regulasi.geospasial');
+    Route::view('/regulasi/e-walidata-kemendagri', 'regulasi.e-walidata-kemendagri')
+        ->name('regulasi.e-walidata-kemendagri');
+    Route::view('/regulasi/satu-data-indonesia', 'regulasi.satu-data-indonesia')
+        ->name('regulasi.satu-data-indonesia');
+    Route::view('/regulasi/interoperabilitas', 'regulasi.interoperabilitas')
+        ->name('regulasi.interoperabilitas');
+    Route::view('/regulasi/metadata-statistik', 'regulasi.metadata-statistik')
+        ->name('regulasi.metadata-statistik');
+    Route::view('/regulasi/standar-data-statistik', 'regulasi.standar-data-statistik')
+        ->name('regulasi.standar-data-statistik');
 });

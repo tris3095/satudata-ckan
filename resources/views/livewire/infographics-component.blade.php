@@ -141,6 +141,7 @@
                         <th class="px-4 py-3">Judul</th>
                         <th class="px-4 py-3">Sumber</th>
                         <th class="px-4 py-3">Gambar</th>
+                        <th class="px-4 py-3">Tanggal</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
@@ -154,6 +155,9 @@
                             <td class="px-4 py-3">{{ $item->source }}</td>
                             <td class="px-4 py-3">
                                 <img src="{{ $item->image_url }}" class="w-40 rounded-md border">
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                {{ $item->created_at?->translatedFormat('d M Y') ?? '-' }}
                             </td>
                             <td class="px-4 py-3">
                                 <span

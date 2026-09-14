@@ -49,14 +49,39 @@ class NewsController extends Controller
                     "verify_peer_name" => false,
                 ),
             );
-            $dberita = json_decode(file_get_contents('https://sumselprov.go.id/api/sumselprov/beritadetailslug?judul=' . $request->slug, true, stream_context_create($arrContextOptions)));
-            $gambar = preg_split('/[,]/', $dberita->gambar, -1, PREG_SPLIT_NO_EMPTY);
-            return view('news.detail', compact('dberita', 'gambar'));
+            $url = 'https://sumselprov.go.id/api/sumselprov/berita/' . $request->slug;
+            $response = file_get_contents($url, false, stream_context_create($arrContextOptions));
+            $resData = json_decode($response);
+
+            if ($resData) {
+                // Support both wrapped in 'data' and raw object formats
+                if (isset($resData->data) && is_object($resData->data)) {
+                    $dberita = $resData->data;
+                } else {
+                    $dberita = $resData;
+                }
+
+                if (isset($dberita->judul) && isset($dberita->slug)) {
+                    // Prepare $gambar as an array of full URLs
+                    // $gambar = [];
+                    // if (!empty($dberita->gambar_url)) {
+                    //   $gambar = explode(',', $dberita->gambar);
+
+                    //} elseif (!empty($dberita->gambar)) {
+                    //  $relativeImages = explode(',', $dberita->gambar);
+
+                    foreach ($relativeImages as $img) {
+                        $gambar[] = 'https://sumselprov.go.id/' . ltrim($img, '/');
+                    }
+                    //  }
+
+                    return view('news.detail', compact('dberita', 'gambar'));
+                }
+            }
+
+            return abort(404);
         } catch (\Throwable $th) {
-            $dberita['data'] = "";
-            $gambar = "";
             return abort(404);
         }
-        return abort(404);
     }
 }

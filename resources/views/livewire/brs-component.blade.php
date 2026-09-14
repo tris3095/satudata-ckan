@@ -191,6 +191,7 @@
                         <th class="px-4 py-3">Deskripsi</th>
                         <th class="px-4 py-3">Gambar</th>
                         <th class="px-4 py-3">Materi</th>
+                        <th class="px-4 py-3">Tanggal</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
@@ -215,6 +216,9 @@
                                     </svg>
                                     <span>Download</span>
                                 </a>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                {{ $item->rilis_date ? \Carbon\Carbon::parse($item->rilis_date)->translatedFormat('d M Y') : '-' }}
                             </td>
                             <td class="px-4 py-3">
                                 <span

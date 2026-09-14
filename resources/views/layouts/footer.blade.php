@@ -128,3 +128,14 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Survei Kepuasan sebelum Login -->
+<div id="loginModal" class="hidden fixed inset-0 z-[100000] flex items-center justify-center bg-black/50 p-4">
+    <div class="bg-white w-full max-w-2xl rounded-lg shadow-xl overflow-hidden flex flex-col" style="height: min(80vh, 700px);">
+        <div class="flex items-center justify-between px-4 py-3 bg-gray-100 border-b">
+            <h3 class="text-sm font-semibold text-gray-700">Survei Kepuasan Pengguna</h3>
+            <button id="closeLoginModal" class="text-gray-500 hover:text-gray-800 text-xl leading-none cursor-pointer">&times;</button>
+        </div>
+        <iframe id="loginIframe" class="w-full flex-1 border-0" src=""></iframe>
+    </div>
+</div>

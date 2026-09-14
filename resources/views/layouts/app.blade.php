@@ -919,28 +919,31 @@
         const closeLoginModal = document.getElementById('closeLoginModal');
         const loginIframe = document.getElementById('loginIframe');
 
-        // Toggle dropdown
-        loginMenuButton.addEventListener('click', () => {
-            loginMenu.classList.toggle('hidden');
-        });
-
         // Setiap link login
+        let pendingLoginHref = null;
+
         document.querySelectorAll('.login-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const url =
                     "https://surveidigital.spbe.go.id/embed/survey/eyJzdXJ2ZXlfaWQiOjIsInNlcnZpY2VfaWQiOjcxLCJob3N0Ijoic3Vtc2VscHJvdi5nby5pZCxzdW1zZWxwcm92MjAyMi5kZXYsc2F0dWRhdGEtY2thbi5kZXYsc2F0dWRhdGEuc3Vtc2VscHJvdi5nby5pZCIsImtleSI6IjE2VHlMaXN4In0=/embed/view/"
+                pendingLoginHref = link.getAttribute('href');
                 loginIframe.src = url; // set iframe src
                 loginModal.classList.remove('hidden');
                 loginMenu.classList.add('hidden'); // tutup dropdown
             });
         });
 
-        // Tutup modal
+        // Tutup modal, lalu lanjutkan ke halaman login yang dituju
         if (closeLoginModal && loginModal && loginIframe) {
             closeLoginModal.addEventListener('click', () => {
                 loginModal.classList.add('hidden');
                 loginIframe.src = '';
+
+                if (pendingLoginHref && pendingLoginHref !== '#') {
+                    window.open(pendingLoginHref, '_blank');
+                }
+                pendingLoginHref = null;
             });
         }
 

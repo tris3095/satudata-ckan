@@ -198,6 +198,7 @@
                         <th class="px-4 py-3">Judul</th>
                         <th class="px-4 py-3">Keterangan</th>
                         <th class="px-4 py-3">Dokumen</th>
+                        <th class="px-4 py-3">Tanggal</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
@@ -220,6 +221,9 @@
                                 @else
                                     <span class="text-gray-400">-</span>
                                 @endif
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                {{ $item->published_at ? $item->published_at->translatedFormat('d M Y') : '-' }}
                             </td>
                             <td class="px-4 py-3">
                                 <span

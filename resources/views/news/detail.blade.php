@@ -2,10 +2,6 @@
 
 @section('title', $dberita->judul)
 
-@push('plugin-style')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-@endpush
-
 @section('content')
     <section class="max-w-7xl mx-auto">
         <div class="bg-white rounded-xl shadow-lg p-3 md:p-5 md:mt-7">
@@ -23,8 +19,8 @@
                         <div class="swiper-wrapper">
                             @foreach ($gambar as $item)
                                 <div class="swiper-slide">
-                                    <img src="https://sumselprov.go.id/storage/{{ substr($item, 7) }}"
-                                        class="w-full h-full 
+                                    <img src="{{ $item }}"
+                                        class="w-full h-full
                                         md:h-[600px] object-cover rounded-md">
                                 </div>
                             @endforeach
@@ -54,33 +50,20 @@
     </section>
 @endsection
 
-@push('plugin-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-@endpush
 @push('custom-scripts')
     <script>
-        new Swiper(".desktopSwiper", {
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-
-        new Swiper(".mobileSwiper", {
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+        document.addEventListener("DOMContentLoaded", function () {
+            new Swiper(".mobileSwiper", {
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
         });
     </script>
 @endpush

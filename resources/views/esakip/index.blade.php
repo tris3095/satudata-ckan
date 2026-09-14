@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Dokumen E-SAKIP')
+@section('title', 'Dokumen Perencanaan')
 
 @section('content')
     <main class="mb-6">
         <!-- Hero Section -->
         <section class="hero max-w-7xl mx-auto py-8">
             <div class="px-3 md:px-5 relative">
-                <h1 class="text-2xl md:text-4xl font-bold text-red-600">Dokumen <span class="text-black">E-SAKIP</span></h1>
+                <h1 class="text-2xl md:text-4xl font-bold text-red-600">Dokumen <span class="text-black">Perencanaan</span>
+                </h1>
                 <p class="text-lg md:text-2xl">Provinsi Sumatera Selatan</p>
             </div>
         </section>
@@ -21,8 +22,7 @@
                 <div>
                     <label class="block text-xs font-medium text-gray-600 mb-1">Jenis Dokumen</label>
                     <input type="text" name="berkas" value="{{ $filters['berkas'] ?? '' }}" list="berkas-options"
-                        placeholder="Contoh: Renstra, RPJMD, LKjIP"
-                        class="w-56 border rounded-md p-2 text-sm">
+                        placeholder="Contoh: Renstra, RPJMD, LKjIP" class="w-56 border rounded-md p-2 text-sm">
                     <datalist id="berkas-options">
                         <option value="RPJPD">
                         <option value="RPJMD">
